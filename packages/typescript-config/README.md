@@ -408,7 +408,11 @@ export default defineConfigWithVueTs(
   },
   "devDependencies": {
     "@tsconfig/node24": "^24.0.3",
-    "@vue/tsconfig": "^0.8.1"
+    "@types/jsdom": "^27.0.0",
+    "@types/node": "^24.10.9",
+    "@vue/tsconfig": "^0.8.1",
+    "vite": "^7.3.1",
+    "vitest": "^4.0.17"
   }
 }
 ```
