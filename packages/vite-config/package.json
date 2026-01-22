@@ -1,0 +1,22 @@
+{
+  "name": "@repo/vite-config",
+  "version": "0.0.0",
+  "type": "module",
+  "private": true,
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "lint": "eslint . --fix --cache",
+    "format": "prettier --write --experimental-cli . --ignore-unknown --cache --cache-location .prettiercache"
+  },
+  "devDependencies": {
+    "@repo/eslint-config": "workspace:*",
+    "@repo/prettier-config": "workspace:*",
+    "@repo/typescript-config": "workspace:*",
+    "@types/node": "^25.0.10",
+    "eslint": "^9.39.2",
+    "typescript": "^5.9.3",
+    "vite": "^7.3.1"
+  }
+}
