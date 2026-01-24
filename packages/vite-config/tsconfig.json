@@ -2,7 +2,7 @@
   "extends": "@repo/typescript-config/tsconfig.node.json",
   "compilerOptions": {
     "rootDir": "src",
-    "types": ["node"],
+    "types": ["node"]
   },
   "include": ["src/**/*.ts"]
 }

@@ -5,6 +5,8 @@
     "dbaeumer.vscode-eslint",
     "EditorConfig.EditorConfig",
     "oxc.oxc-vscode",
-    "prettier.prettier-vscode"
+    "streetsidesoftware.code-spell-checker",
+    "vercel.turbo-vsc",
+    "esbenp.prettier-vscode"
   ]
 }

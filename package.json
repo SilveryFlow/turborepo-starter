@@ -6,13 +6,18 @@
     "build": "turbo run build",
     "dev": "turbo run dev",
     "lint": "turbo run lint",
-    "format": "turbo run format && prettier --write --experimental-cli \"*.{json,md}\" --ignore-unknown",
+    "format": "turbo run format format:root",
+    "format:root": "prettier --write --experimental-cli \"**/*.{js,ts,mjs,cjs,json,css,less,scss,vue,html,md}\" \"!apps\" \"!packages\" --ignore-unknown --cache --cache-location .prettiercache",
+    "spell": "turbo run spell spell:root",
+    "spell:root": "cspell \"**/*.{js,ts,mjs,cjs,json,css,less,scss,vue,html,md}\" \"!apps\" \"!packages\"",
     "check-types": "turbo run check-types",
     "app:new": "turbo gen workspace",
     "app:copy": "turbo gen workspace --copy"
   },
   "devDependencies": {
     "@repo/prettier-config": "workspace:*",
+    "@repo/spell-config": "workspace:*",
+    "cspell": "^9.6.0",
     "prettier": "^3.8.0",
     "turbo": "^2.7.4"
   },

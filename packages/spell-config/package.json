@@ -1,5 +1,5 @@
 {
-  "name": "@repo/prettier-config",
+  "name": "@repo/spell-config",
   "version": "0.0.0",
   "main": "index.js",
   "type": "module",
@@ -12,6 +12,7 @@
     ".": "./index.js"
   },
   "devDependencies": {
-    "prettier": "^3.8.0"
+    "@repo/eslint-config": "workspace:*",
+    "@repo/prettier-config": "workspace:*"
   }
 }

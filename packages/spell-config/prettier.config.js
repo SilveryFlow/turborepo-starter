@@ -1,4 +1,5 @@
-import repoConfig from '@repo/prettier-config'
+import repoConfig from './index.js'
+
 /**
  * @type {import('prettier').Config}
  */

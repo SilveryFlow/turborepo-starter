@@ -11,7 +11,31 @@
       "dependsOn": ["^lint"]
     },
     "format": {
-      "inputs": ["$TURBO_DEFAULT$", "**/*.{js,ts,vue,json,css,md}", "../../packages/prettier-config/index.js"],
+      "inputs": ["**/*.{js,ts,mjs,cjs,json,css,less,scss,vue,html,md}", "../../packages/prettier-config/index.js"],
+      "outputs": []
+    },
+    "//#format:root": {
+      "inputs": [
+        "!apps",
+        "!packages",
+        "packages/prettier-config/index.js",
+        "*.{js,ts,mjs,cjs,json,css,less,scss,vue,html,md}",
+        "doc/**/*.md"
+      ],
+      "outputs": []
+    },
+    "spell": {
+      "inputs": ["**/*.{js,ts,mjs,cjs,json,css,less,scss,vue,html,md}", "../../cspell.config.js"],
+      "outputs": []
+    },
+    "//#spell:root": {
+      "inputs": [
+        "!apps",
+        "!packages",
+        "cspell.config.js",
+        "*.{js,ts,mjs,cjs,json,css,less,scss,vue,html,md}",
+        "doc/**/*.md"
+      ],
       "outputs": []
     },
     "check-types": {
