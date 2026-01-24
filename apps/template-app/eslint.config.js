@@ -22,7 +22,7 @@ export default [
   {
     languageOptions: {
       globals: {
-        ...autoImport.globals,
+        ...(autoImport?.globals ?? {}),
       },
     },
   },
