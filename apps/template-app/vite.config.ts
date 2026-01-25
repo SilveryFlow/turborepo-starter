@@ -29,13 +29,7 @@ export default defineConfig(configEnv => {
     }),
     defineConfig({
       server: {
-        host: '0.0.0.0', // 局域网访问
         port,
-        open: true,
-        // 预热常用文件，提升首屏加载速度
-        warmup: {
-          clientFiles: ['./src/main.ts', './src/App.vue', './src/router/index.ts'],
-        },
         proxy: {
           // HTTP API 代理
           [API_BASE]: {
@@ -47,7 +41,6 @@ export default defineConfig(configEnv => {
           // WebSocket 代理
           [WS_BASE]: {
             target: 'ws://127.0.0.1:10002', // WebSocket 地址
-            // target: 'ws://localhost:10002', // WebSocket 地址
             changeOrigin: true,
             ws: true, // 开启 websocket 代理
             rewrite: path => path.replace(new RegExp(`^${WS_BASE}`), ''),

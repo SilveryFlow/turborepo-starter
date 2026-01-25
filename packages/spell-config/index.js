@@ -11,6 +11,7 @@ export default defineConfig({
     '**/.gitignore',
     '**/.prettierignore',
     '**/.prettiercache',
+    '**/.eslintcache',
     '**/commitlint.config.js',
     '**/package.json',
     '**/*.mp4',

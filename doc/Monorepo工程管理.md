@@ -2150,8 +2150,12 @@ lint-staged的--verbose参数设置即使任务成功也显示任务输出。默
 ```json
 {
   "lint-staged": {
-    "**/*.{js,ts,vue,jsx,tsx}": ["eslint --fix", "prettier --write --experimental-cli", "cspell --no-exit-code"],
-    "**/*.{css,scss,html,json}": ["prettier --write --experimental-cli", "cspell --no-exit-code"],
+    "**/*.{js,ts,vue,jsx,tsx}": [
+      "eslint --fix",
+      "prettier --write --experimental-cli",
+      "cspell --no-exit-code --no-must-find-files"
+    ],
+    "**/*.{css,scss,html,json}": ["prettier --write --experimental-cli", "cspell --no-exit-code --no-must-find-files"],
     "**/*.md": ["prettier --write --experimental-cli"]
   }
 }
@@ -2162,8 +2166,12 @@ lint-staged的--verbose参数设置即使任务成功也显示任务输出。默
 ```js
 /** @type {import('lint-staged').Configuration} */
 export default {
-  '**/*.{js,ts,vue,jsx,tsx}': ['eslint --fix', 'prettier --write --experimental-cli', 'cspell --no-exit-code'],
-  '**/*.{css,scss,html,json}': ['prettier --write --experimental-cli', 'cspell --no-exit-code'],
+  '**/*.{js,ts,vue,jsx,tsx}': [
+    'eslint --fix',
+    'prettier --write --experimental-cli',
+    'cspell --no-exit-code --no-must-find-files',
+  ],
+  '**/*.{css,scss,html,json}': ['prettier --write --experimental-cli', 'cspell --no-exit-code --no-must-find-files'],
   '**/*.md': ['prettier --write --experimental-cli'],
 }
 ```

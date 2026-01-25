@@ -40,3 +40,8 @@ yarn-error.log*
 # ai
 .agent
 .shared
+
+# 缓存
+**/.eslintcache
+**/.prettiercache
+
