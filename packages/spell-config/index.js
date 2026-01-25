@@ -54,5 +54,7 @@ export default defineConfig({
     'unocss',
     'vueuse',
     'prettiercache',
+    'oxlint',
+    'esbenp',
   ],
 })

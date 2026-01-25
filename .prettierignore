@@ -34,7 +34,7 @@ package-lock.json
 yarn.lock
 
 # --- IDE & 系统 (System) ---
-.vscode/
+#.vscode/
 .idea/
 .DS_Store
 *.log

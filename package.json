@@ -13,14 +13,27 @@
     "spell:root": "cspell \"**/*.{js,ts,mjs,cjs,json,css,less,scss,vue,html,md}\" \"!apps\" \"!packages\"",
     "check-types": "turbo run check-types",
     "app:new": "turbo gen workspace",
-    "app:copy": "turbo gen workspace --copy"
+    "app:copy": "turbo gen workspace --copy",
+    "commit": "git-cz",
+    "prepare": "husky"
+  },
+  "config": {
+    "commitizen": {
+      "path": "node_modules/cz-git"
+    }
   },
   "devDependencies": {
+    "@commitlint/cli": "^20.3.1",
+    "@commitlint/config-conventional": "^20.3.1",
     "@repo/eslint-config": "workspace:*",
     "@repo/prettier-config": "workspace:*",
     "@repo/spell-config": "workspace:*",
+    "commitizen": "^4.3.1",
     "cspell": "^9.6.0",
+    "cz-git": "^1.12.0",
     "eslint": "^9.39.2",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.2.7",
     "prettier": "^3.8.0",
     "turbo": "^2.7.4"
   },

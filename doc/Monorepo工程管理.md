@@ -1944,6 +1944,260 @@ export default defineConfig({
 
 ## 五、规范化代码提交
 
+### 5.1 工具安装
+
+```bash
+pnpm add -Dw husky lint-staged @commitlint/cli @commitlint/config-conventional commitizen cz-git
+```
+
+- husky: 拦截git动作，并执行脚本
+- lint-staged: 只对git暂存区文件执行脚本
+- @commitlint/cli: 校验git提交信息格式
+- @commitlint/config-conventional: 提交信息规范
+- commitizen: 交互式填写提交信息
+- cz-git: commitizen的插件，工程性更强，自定义更高，交互性更好
+
+这些工具在pre-commit进行代码校验和格式化，在commit-msg校验提交信息，支持交互式提交信息填写。
+
+### 5.2 交互式提交信息填写
+
+#### 5.2.1 配置文件创建
+
+在根目录创建`commitlint.config.js`，使用cz-git提供的模板
+
+```js
+import { defineConfig } from 'cz-git'
+
+export default defineConfig({
+  extends: ['@commitlint/config-conventional'],
+  rules: {
+    // @see: https://commitlint.js.org/#/reference-rules
+  },
+  prompt: {
+    alias: { fd: 'docs: fix typos' },
+    messages: {
+      type: '选择你要提交的类型 :',
+      scope: '选择一个提交范围（可选）:',
+      customScope: '请输入自定义的提交范围 :',
+      subject: '填写简短精炼的变更描述 :\n',
+      body: '填写更加详细的变更描述（可选）。使用 "|" 换行 :\n',
+      breaking: '列举非兼容性重大的变更（可选）。使用 "|" 换行 :\n',
+      footerPrefixesSelect: '选择关联issue前缀（可选）:',
+      customFooterPrefix: '输入自定义issue前缀 :',
+      footer: '列举关联issue (可选) 例如: #31, #I3244 :\n',
+      confirmCommit: '是否提交或修改commit ?',
+    },
+    types: [
+      { value: 'feat', name: 'feat:     ✨ 新增功能 | A new feature', emoji: ':sparkles:' },
+      { value: 'fix', name: 'fix:      🐛 修复缺陷 | A bug fix', emoji: ':bug:' },
+      { value: 'docs', name: 'docs:     📝 文档更新 | Documentation only changes', emoji: ':memo:' },
+      {
+        value: 'style',
+        name: 'style:    💄 代码格式 | Changes that do not affect the meaning of the code',
+        emoji: ':lipstick:',
+      },
+      {
+        value: 'refactor',
+        name: 'refactor: ♻️ 代码重构 | A code change that neither fixes a bug nor adds a feature',
+        emoji: ':recycle:',
+      },
+      { value: 'perf', name: 'perf:     ⚡️ 性能提升 | A code change that improves performance', emoji: ':zap:' },
+      {
+        value: 'test',
+        name: 'test:     ✅ 测试相关 | Adding missing tests or correcting existing tests',
+        emoji: ':white_check_mark:',
+      },
+      {
+        value: 'build',
+        name: 'build:    📦️ 构建相关 | Changes that affect the build system or external dependencies',
+        emoji: ':package:',
+      },
+      {
+        value: 'ci',
+        name: 'ci:       🎡 持续集成 | Changes to our CI configuration files and scripts',
+        emoji: ':ferris_wheel:',
+      },
+      { value: 'revert', name: 'revert:   ⏪️ 回退代码 | Revert to a commit', emoji: ':rewind:' },
+      {
+        value: 'chore',
+        name: 'chore:    🔨 其他修改 | Other changes that do not modify src or test files',
+        emoji: ':hammer:',
+      },
+    ],
+
+    useEmoji: true,
+    emojiAlign: 'center',
+    useAI: false,
+    aiNumber: 1,
+    themeColorCode: '',
+    scopes: [],
+    allowCustomScopes: true,
+    allowEmptyScopes: true,
+    customScopesAlign: 'bottom',
+    customScopesAlias: 'custom',
+    emptyScopesAlias: 'empty',
+    upperCaseSubject: null,
+    markBreakingChangeMode: false,
+    allowBreakingChanges: ['feat', 'fix'],
+    breaklineNumber: 100,
+    breaklineChar: '|',
+    skipQuestions: [],
+    issuePrefixes: [
+      // 如果使用 gitee 作为开发管理
+      { value: 'link', name: 'link:     链接 ISSUES 进行中' },
+      { value: 'closed', name: 'closed:   标记 ISSUES 已完成' },
+    ],
+    customIssuePrefixAlign: 'top',
+    emptyIssuePrefixAlias: 'skip',
+    customIssuePrefixAlias: 'custom',
+    allowCustomIssuePrefix: true,
+    allowEmptyIssuePrefix: true,
+    confirmColorize: true,
+    scopeOverrides: undefined,
+    defaultBody: '',
+    defaultIssues: '',
+    defaultScope: '',
+    defaultSubject: '',
+  },
+})
+```
+
+#### 5.2.2 配置交互式提交
+
+修改根目录的 `package.json`，添加脚本并指定 `cz-git` 适配器。
+
+```json
+{
+  "scripts": {
+    "commit": "git-cz"
+  },
+  "config": {
+    "commitizen": {
+      "path": "node_modules/cz-git"
+    }
+  }
+}
+```
+
+#### 5.2.3 scopes配置
+
+monorepo有多个子包，配置自动读取目录结构定义提交信息的scopes。
+
+修改commitlint.config.js，动态获取scopes并开启scope多选:
+
+```js
+import { readdirSync } from 'node:fs'
+import { resolve, dirname } from 'node:path'
+import { fileURLToPath } from 'node:url'
+
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = dirname(__filename)
+
+const getScopes = () => {
+  const dirs = []
+  const apps = readdirSync(resolve(__dirname, 'apps'))
+  const packages = readdirSync(resolve(__dirname, 'packages'))
+  dirs.push(...apps, ...packages)
+  return dirs
+}
+
+export default defineConfig({
+  extends: ['@commitlint/config-conventional'],
+  rules: {
+    // @see: https://commitlint.js.org/#/reference-rules
+  },
+  prompt: {
+    scopes: [...getScopes(), 'root'],
+    enableMultipleScopes: true,
+  },
+})
+```
+
+### 5.3 git hooks挂载
+
+#### 5.3.1 初始化husky
+
+```bash
+pnpm exec husky init
+```
+
+会在 `.husky/` 中创建 `pre-commit` 脚本，并更新 `package.json` 中的 `prepare` 脚本。
+
+```json
+{
+  "scripts": {
+    "prepare": "husky"
+  }
+}
+```
+
+#### 5.3.2 配置 pre-commit
+
+##### 1. 唤醒 lint-staged
+
+在提交前唤醒 lint-staged，对暂存区文件进行格式化和拼写检查
+
+```
+pnpm exec lint-staged --verbose
+```
+
+lint-staged的--verbose参数设置即使任务成功也显示任务输出。默认情况下，只显示失败的输出。
+
+##### 2. 配置 lint-staged
+
+在根目录的 `package.json` 中添加 `lint-staged` 的配置。决定对哪些文件跑哪些命令。
+
+```json
+{
+  "lint-staged": {
+    "**/*.{js,ts,vue,jsx,tsx}": ["eslint --fix", "prettier --write --experimental-cli", "cspell --no-exit-code"],
+    "**/*.{css,scss,html,json}": ["prettier --write --experimental-cli", "cspell --no-exit-code"],
+    "**/*.md": ["prettier --write --experimental-cli"]
+  }
+}
+```
+
+或者在根目录创建lint-staged.config.js
+
+```js
+/** @type {import('lint-staged').Configuration} */
+export default {
+  '**/*.{js,ts,vue,jsx,tsx}': ['eslint --fix', 'prettier --write --experimental-cli', 'cspell --no-exit-code'],
+  '**/*.{css,scss,html,json}': ['prettier --write --experimental-cli', 'cspell --no-exit-code'],
+  '**/*.md': ['prettier --write --experimental-cli'],
+}
+```
+
+这些任务会并发执行，但每个任务的命令有顺序。
+
+在 `lint-staged` 阶段直接调用工具而不是使用 `turbo` ，因为 `lint-staged` 只包含暂存区，而 `turbo` 是整个项目。
+
+> 给cspell添加--no-exit-code参数，遇到陌生词报告但不抛出错误，不打断提交流程。结合lint-staged --verbose查看陌生词。
+
+> [!NOTE]
+>
+> `lint-staged` 默认会在检查前临时备份未暂存的改动，只处理已暂存的部分；如果任务报错，会自动回滚到提交前状态。如果代码“消失”或格式没生效，都是正常的情况，可以用 `git stash pop` 找回。
+
+#### 5.3.3 配置 commit-msg
+
+在commit-msg Hook 执行 commitlint，当有人跳过 `pnpm commit` 直接用 `git commit -m "xx"`时可能会有不规范的提交信息，在此处负责拦截。
+
+创建钩子文件
+
+```bash
+echo "pnpm exec commitlint --edit \$1" > .husky/commit-msg
+```
+
+这个命令如果使用cmd或powershell执行会有问题，可以选择手动创建commit-msg文件，修改内容如下
+
+```shell
+pnpm exec commitlint --edit $1
+```
+
+> [!IMPORTANT]
+>
+> 确保换行符是LF
+
 ## 六、单元测试
 
 ## 七、版本管理与发布

@@ -14,7 +14,7 @@ export default [
   // 应用级忽略规则
   {
     name: 'app/ignores',
-    ignores: ['**/dist/**', '**/dist-ssr/**', '**/coverage/**', '**/.vitepress/cache/**', '**/node_modules/**'],
+    ignores: ['**/dist/**', '**/dist-ssr/**', '**/coverage/**', '**/.vitepress/cache/**'],
   },
 
   ...baseConfig,
