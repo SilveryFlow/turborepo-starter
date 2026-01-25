@@ -1,4 +1,4 @@
-import { config as baseConfig } from './base.js'
+import { config as baseConfig } from '@repo/eslint-config/base'
 
 /**
  * ESLint 配置
@@ -14,7 +14,7 @@ export default [
   // 应用级忽略规则
   {
     name: 'app/ignores',
-    ignores: ['**/dist/**', '**/dist-ssr/**', '**/coverage/**', '**/.vitepress/cache/**'],
+    ignores: ['**/dist/**', '**/dist-ssr/**', '**/coverage/**', '**/.vitepress/cache/**', '**/node_modules/**'],
   },
 
   ...baseConfig,

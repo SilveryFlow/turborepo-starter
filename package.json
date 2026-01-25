@@ -5,7 +5,8 @@
   "scripts": {
     "build": "turbo run build",
     "dev": "turbo run dev",
-    "lint": "turbo run lint",
+    "lint": "turbo run lint lint:root",
+    "lint:root": "eslint . --ignore-pattern \"apps\" --ignore-pattern \"packages\" --fix --cache",
     "format": "turbo run format format:root",
     "format:root": "prettier --write --experimental-cli \"**/*.{js,ts,mjs,cjs,json,css,less,scss,vue,html,md}\" \"!apps\" \"!packages\" --ignore-unknown --cache --cache-location .prettiercache",
     "spell": "turbo run spell spell:root",
@@ -15,9 +16,11 @@
     "app:copy": "turbo gen workspace --copy"
   },
   "devDependencies": {
+    "@repo/eslint-config": "workspace:*",
     "@repo/prettier-config": "workspace:*",
     "@repo/spell-config": "workspace:*",
     "cspell": "^9.6.0",
+    "eslint": "^9.39.2",
     "prettier": "^3.8.0",
     "turbo": "^2.7.4"
   },

@@ -8,7 +8,7 @@ export default [
   // 指定文件范围
   {
     name: 'app/files-to-lint',
-    files: ['**/*.{vue,js,ts,mts,tsx}'],
+    files: ['**/*.{js,ts,mjs,cjs,vue}'],
   },
 
   // 应用级忽略规则
