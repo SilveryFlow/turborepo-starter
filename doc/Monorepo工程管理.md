@@ -600,14 +600,6 @@ app的tsconfig是通过项目引用来配置的。tsconfig.json作为入口，�
 
 配置composite为true后，所有实现文件必须与 `include` 模式匹配。
 
-原本tsconfig.vitest.json的include配置只有测试文件，没有测试文件中引用的被测文件，需要扩大范围。此处直接包含整个src。
-
-```json
-{
-  "include": ["env.d.ts", "src/**/*", "src/**/*.vue"] //从tsconfig.vue.json里复制
-}
-```
-
 ##### 4. exports导出路径
 
 在继承的时候，如果想要简化路径，可以使用package.json的exports字段
@@ -2114,7 +2106,7 @@ export default defineVitestConfig(viteConfig, {
 
 ## 六、规范化代码提交
 
-### 5.1 工具安装
+### 6.1 工具安装
 
 ```bash
 pnpm add -Dw husky lint-staged @commitlint/cli @commitlint/config-conventional commitizen cz-git
@@ -2129,9 +2121,9 @@ pnpm add -Dw husky lint-staged @commitlint/cli @commitlint/config-conventional c
 
 这些工具在pre-commit进行代码校验和格式化，在commit-msg校验提交信息，支持交互式提交信息填写。
 
-### 5.2 交互式提交信息填写
+### 6.2 交互式提交信息填写
 
-#### 5.2.1 配置文件创建
+#### 6.2.1 配置文件创建
 
 在根目录创建`commitlint.config.js`，使用cz-git提供的模板
 
@@ -2232,7 +2224,7 @@ export default defineConfig({
 })
 ```
 
-#### 5.2.2 配置交互式提交
+#### 6.2.2 配置交互式提交
 
 修改根目录的 `package.json`，添加脚本并指定 `cz-git` 适配器。
 
@@ -2249,7 +2241,7 @@ export default defineConfig({
 }
 ```
 
-#### 5.2.3 scopes配置
+#### 6.2.3 scopes配置
 
 monorepo有多个子包，配置自动读取目录结构定义提交信息的scopes。
 
@@ -2283,9 +2275,9 @@ export default defineConfig({
 })
 ```
 
-### 5.3 git hooks挂载
+### 6.3 git hooks挂载
 
-#### 5.3.1 初始化husky
+#### 6.3.1 初始化husky
 
 ```bash
 pnpm exec husky init
@@ -2301,7 +2293,7 @@ pnpm exec husky init
 }
 ```
 
-#### 5.3.2 配置 pre-commit
+#### 6.3.2 配置 pre-commit
 
 ##### 1. 唤醒 lint-staged
 
@@ -2356,7 +2348,7 @@ export default {
 >
 > `lint-staged` 默认会在检查前临时备份未暂存的改动，只处理已暂存的部分；如果任务报错，会自动回滚到提交前状态。如果代码“消失”或格式没生效，都是正常的情况，可以用 `git stash pop` 找回。
 
-#### 5.3.3 配置 commit-msg
+#### 6.3.3 配置 commit-msg
 
 在commit-msg Hook 执行 commitlint，当有人跳过 `pnpm commit` 直接用 `git commit -m "xx"`时可能会有不规范的提交信息，在此处负责拦截。
 
@@ -2521,9 +2513,7 @@ export default defineConfig({
 })
 ```
 
-## 九、UI组件包
-
-## 十、工具函数包
+## 九、工具函数包
 
 #### 1. 创建子包
 
@@ -2592,7 +2582,7 @@ export const getSum = (a: number, b: number) => {
 #### 3. 子包使用
 
 ```bash
-pnpm i -D --filter @repo/template-app @repo/utils --workspace
+pnpm i --filter @repo/template-app @repo/utils --workspace
 ```
 
 ```ts
@@ -2671,6 +2661,32 @@ package.json新增脚本
 }
 ```
 
+修改eslint.config.js
+
+```js
+import { config as vitestConfig } from '@repo/eslint-config/vitest'
+
+/**
+ * ESLint 配置
+ * @type {import("eslint").Linter.Config[]}
+ */
+export default [
+  // 指定文件范围
+  {
+    name: 'app/files-to-lint',
+    files: ['**/*.{js,ts,mjs,cjs,vue}'],
+  },
+
+  // 应用级忽略规则
+  {
+    name: 'app/ignores',
+    ignores: ['**/dist/**', '**/dist-ssr/**', '**/coverage/**', '**/.vitepress/cache/**'],
+  },
+
+  ...vitestConfig,
+]
+```
+
 #### 5. 使用npm包
 
 以day.js为例
@@ -2717,4 +2733,245 @@ export default defineConfig({
 ```ts
 import { getNow } from '@repo/utils'
 console.log(getNow())
+```
+
+## 十、UI组件包
+
+### 10.1 创建子包
+
+```
+pnpm app:copy
+```
+
+复制utils包创建`@repo/ui`
+
+### 10.2 环境配置
+
+#### 10.2.1 清理tsdown配置
+
+- 删除tsdown配置文件
+- 清理相关script
+- 清理相关依赖
+- 清理src
+
+#### 10.2.2 环境配置
+
+template-app 已经包含了完整的 Vue + DOM + UnoCSS + Vitest 环境配置。参考并“降级”为库配置
+
+##### 1. 迁移package.json
+
+迁移vite、vue、unocss相关依赖，将vue等设置为peerDependencies。配置vite打包script
+
+```json
+{
+  "name": "@repo/ui",
+  "version": "0.0.0",
+  "type": "module",
+  "private": true,
+  "main": "./dist/index.mjs",
+  "module": "./dist/index.mjs",
+  "types": "./src/index.ts",
+  "exports": {
+    ".": {
+      "types": "./src/index.ts",
+      "default": "./dist/index.mjs"
+    }
+  },
+  "scripts": {
+    "dev": "vite build --watch",
+    "build": "vite build",
+    "lint": "eslint . --fix --cache",
+    "format": "prettier --write --experimental-cli \"**/*.{js,ts,mjs,cjs,json,css,less,scss,vue,html,md}\" --ignore-unknown --cache --cache-location .prettiercache",
+    "spell": "cspell \"**/*.{js,ts,mjs,cjs,json,css,less,scss,vue,html,md}\"",
+    "type-check": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "devDependencies": {
+    "@repo/eslint-config": "workspace:*",
+    "@repo/prettier-config": "workspace:*",
+    "@repo/spell-config": "workspace:*",
+    "@repo/test-config": "workspace:*",
+    "@repo/typescript-config": "workspace:*",
+    "@repo/unocss-config": "workspace:*",
+    "@repo/vite-config": "workspace:*",
+    "@types/node": "^24.10.9",
+    "typescript": "^5.9.3",
+    "unocss": "^66.6.0",
+    "vite": "^7.3.1",
+    "vite-plugin-vue-devtools": "^8.0.5",
+    "vitest": "^4.0.16",
+    "vue-tsc": "^3.2.2",
+    "vue": "^3.5.26",
+    "sass-embedded": "^1.97.3"
+  },
+  "peerDependencies": {
+    "vue": "^3.5.26"
+  }
+}
+```
+
+##### 2. typescript配置
+
+从template-app复制tsconfig.json、env.d.ts、tsconfig.app.json、tsconfig.node.json、tsconfig.vitest.json。
+
+tsconfig.app.json改名为tsconfig.lib.json
+
+##### 3. eslint配置
+
+从template-app复制eslint.config.js
+
+##### 4. vite配置
+
+从template-app复制vite.config.ts
+
+1. 去掉默认build和serve选项，配置库模式打包
+
+```ts
+import { defineConfig, mergeConfig } from 'vite'
+import { resolve } from 'path'
+import { vuePluginPreset, createAlias, defaultCssOptions } from '@repo/vite-config'
+import UnoCSS from 'unocss/vite'
+
+// https://vite.dev/config/
+export default defineConfig(() => {
+  return mergeConfig(
+    defineConfig({
+      plugins: [...vuePluginPreset(), UnoCSS()],
+      resolve: {
+        alias: createAlias(import.meta.url),
+      },
+      css: defaultCssOptions,
+    }),
+    defineConfig({
+      build: {
+        lib: {
+          entry: resolve(import.meta.dirname, 'src/index.ts'),
+          name: 'RepoUI',
+          fileName: 'index',
+          formats: ['es'],
+        },
+        sourcemap: true,
+        rollupOptions: {
+          // 确保外部化处理那些你不想打包进库的依赖
+          external: ['vue', 'unocss', 'element-plus'],
+          output: {
+            preserveModules: true,
+          },
+        },
+        minify: false,
+      },
+    }),
+  )
+})
+```
+
+2. 修改package.json
+
+```json
+{
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./src/index.ts",
+  "exports": {
+    ".": {
+      "types": "./src/index.ts",
+      "default": "./dist/index.js"
+    },
+    "./style.css": "./dist/index.css"
+  }
+}
+```
+
+```json
+  "devDependencies": {
+    "@repo/eslint-config": "workspace:*",
+    "@repo/prettier-config": "workspace:*",
+    "@repo/spell-config": "workspace:*",
+    "@repo/test-config": "workspace:*",
+    "@repo/typescript-config": "workspace:*",
+    "@repo/unocss-config": "workspace:*",
+    "@repo/vite-config": "workspace:*",
+    "@types/node": "^24.10.9",
+    "@vueuse/core": "^14.1.0",
+    "element-plus": "^2.13.2",
+    "sass-embedded": "^1.97.3",
+    "typescript": "^5.9.3",
+    "unocss": "^66.6.0",
+    "vite": "^7.3.1",
+    "vite-plugin-vue-devtools": "^8.0.5",
+    "vitest": "^4.0.16",
+    "vue": "^3.5.26",
+    "vue-tsc": "^3.2.2"
+  },
+  "peerDependencies": {
+    "element-plus": "^2.13.2",
+    "unocss": "^66.6.0",
+    "vue": "^3.5.26"
+  }
+```
+
+##### 5. vitest配置
+
+从template-app复制vitest.config.ts
+
+##### 6. unocss配置
+
+从template-app复制
+
+#### 10.2.3 封装组件
+
+src结构如下
+
+```
+.
+├── assets
+│   └── styles
+│       └── scss-variables.scss
+├── components
+│   ├── buttons
+│   │   ├── Button.vue
+│   │   └── index.ts
+│   └── input
+│       ├── index.ts
+│       └── input.vue
+└──  index.ts
+```
+
+#### 10.2.4 app使用
+
+```bash
+pnpm i --filter @repo/template-app @repo/ui --workspace
+```
+
+在app引入样式
+
+```js
+import '@repo/ui/style.css'
+```
+
+使用组件
+
+```vue
+<script setup lang="ts">
+import { Button, Input } from '@repo/ui'
+</script>
+
+<template>
+  <div class="about" flex-center>
+    <h1>This is an about page</h1>
+    <Button type="submit">Click me</Button>
+    <Input />
+  </div>
+</template>
+
+<style>
+@media (min-width: 1024px) {
+  .about {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+  }
+}
+</style>
 ```

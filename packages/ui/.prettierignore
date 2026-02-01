@@ -1,0 +1,46 @@
+# --- 依赖与构建 (Build & Dependencies) ---
+node_modules/
+dist/
+dist-ssr/
+*.local
+
+# --- Turborepo & 缓存 (Cache) ---
+.turbo/
+.cache/
+.temp/
+*.tsbuildinfo
+
+# --- 测试 (Vitest & Coverage) ---
+coverage/
+test-results/
+__snapshots__/
+
+# --- 静态资源 (Static Assets) ---
+# 建议忽略 public 目录，因为里面通常是第三方库或大型 SVG
+public/
+*.min.js
+*.min.css
+*.svg
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.ico
+
+# --- 配置文件与锁文件 (Config & Lock) ---
+# 锁文件千万不要格式化，会导致校验失败或 Diff 爆炸
+pnpm-lock.yaml
+package-lock.json
+yarn.lock
+
+# --- IDE & 系统 (System) ---
+.vscode/
+.idea/
+.DS_Store
+*.log
+.eslintcache
+
+# --- 自动生成的文件 (Auto-generated) ---
+# 如果用了插件自动生成类型（如 unplugin-auto-import）
+auto-imports.d.ts
+components.d.ts

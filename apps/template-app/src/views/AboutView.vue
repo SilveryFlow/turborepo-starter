@@ -1,6 +1,12 @@
+<script setup lang="ts">
+import { Button, Input } from '@repo/ui'
+</script>
+
 <template>
-  <div class="about">
+  <div class="about" flex-center>
     <h1>This is an about page</h1>
+    <Button type="submit">Click me</Button>
+    <Input />
   </div>
 </template>
 

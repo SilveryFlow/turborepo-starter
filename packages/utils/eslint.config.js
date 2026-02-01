@@ -1,4 +1,4 @@
-import { config as baseConfig } from '@repo/eslint-config/base'
+import { config as vitestConfig } from '@repo/eslint-config/vitest'
 
 /**
  * ESLint 配置
@@ -17,5 +17,5 @@ export default [
     ignores: ['**/dist/**', '**/dist-ssr/**', '**/coverage/**', '**/.vitepress/cache/**'],
   },
 
-  ...baseConfig,
+  ...vitestConfig,
 ]

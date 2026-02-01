@@ -10,6 +10,8 @@ import '@csstools/normalize.css'
 
 import 'virtual:uno.css'
 
+import '@repo/ui/style.css'
+
 const app = createApp(App)
 
 app.use(createPinia())
