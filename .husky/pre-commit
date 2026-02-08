@@ -1,1 +1,1 @@
-pnpm exec lint-staged --verbose
+bun x lint-staged --verbose

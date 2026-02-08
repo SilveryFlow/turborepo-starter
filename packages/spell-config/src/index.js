@@ -6,7 +6,7 @@ export default defineConfig({
   ignorePaths: [
     '**/.git',
     '**/.turbo/**',
-    '**/pnpm-lock.yaml',
+    '**/bun.lock',
     '**/eslint.config.js',
     '**/.gitignore',
     '**/.prettierignore',
@@ -36,8 +36,10 @@ export default defineConfig({
   dictionaries: ['typescript', 'node', 'html', 'css', 'bash', 'misc', 'npm', 'fonts', 'filetypes', 'softwareTerms'],
   words: [
     'turborepo',
-    'pnpm',
+    'bun',
+    'mise',
     'vite',
+    'Attributify',
     'rolldown',
     'tsdown',
     'cspell',

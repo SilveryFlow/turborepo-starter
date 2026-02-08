@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## 项目概述
 
-这是一个基于 pnpm + Turborepo 的 monorepo 项目，用于构建 Vue 3 应用程序和可共享的 UI 组件库。
+这是一个基于 Bun + Turborepo 的 monorepo 项目，用于构建 Vue 3 应用程序和可共享的 UI 组件库。
 
 **技术栈：**
 
@@ -22,37 +22,37 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ```bash
 # 构建所有包
-pnpm build
+bun build
 
 # 启动所有开发服务器
-pnpm dev
+bun dev
 
 # Lint 所有包
-pnpm lint
+bun lint
 
 # 格式化所有代码
-pnpm format
+bun format
 
 # 拼写检查
-pnpm spell
+bun spell
 
 # 类型检查
-pnpm type-check
+bun type-check
 
 # 运行所有测试
-pnpm test
+bun test
 
 # 运行测试监视模式
-pnpm test:watch
+bun test:watch
 
 # 创建新的 workspace（应用或包）
-pnpm app:new
+bun app:new
 
 # 复制现有 workspace
-pnpm app:copy
+bun app:copy
 
 # 提交代码（使用 Commitizen）
-pnpm commit
+bun commit
 ```
 
 ### 针对特定包的命令
@@ -61,26 +61,26 @@ pnpm commit
 
 ```bash
 # 仅构建 ui 包
-pnpm --filter @repo/ui build
+bun --filter @repo/ui build
 
 # 仅在 template-app 中运行 dev
-pnpm --filter @repo/template-app dev
+bun --filter @repo/template-app dev
 
 # 仅测试 utils 包
-pnpm --filter @repo/utils test
+bun --filter @repo/utils test
 
 # 类型检查特定包
-pnpm --filter @repo/ui type-check
+bun --filter @repo/ui type-check
 ```
 
 ### 单个测试
 
 ```bash
 # 在 utils 包中运行特定测试文件
-pnpm --filter @repo/utils test src/utils/date.test.ts
+bun --filter @repo/utils test src/utils/date.test.ts
 
 # 在 template-app 中运行特定测试
-pnpm --filter @repo/template-app test src/components/__tests__/Button.test.ts
+bun --filter @repo/template-app test src/components/__tests__/Button.test.ts
 ```
 
 ## 项目架构
@@ -88,7 +88,7 @@ pnpm --filter @repo/template-app test src/components/__tests__/Button.test.ts
 ### 目录结构
 
 ```
-pnpm-turborepo/
+bun-turborepo/
 ├── apps/
 │   └── template-app/          # Vue 3 应用程序模板
 ├── packages/
@@ -102,7 +102,7 @@ pnpm-turborepo/
 │   ├── utils/                 # 工具函数库（使用 tsdown 构建）
 │   └── ui/                    # Vue 3 UI 组件库（使用 Vite 构建）
 ├── turbo.json                 # Turborepo 配置
-├── pnpm-workspace.yaml        # pnpm workspace 配置
+├── package.json                # Bun workspace 配置
 ├── commitlint.config.js       # Commitlint 配置
 └── lint-staged.config.js      # Lint-staged 配置
 ```
@@ -180,7 +180,7 @@ const count = ref(0)
 
 项目使用 Commitizen + Commitlint 进行提交规范检查。
 
-运行 `pnpm commit` 会启动交互式提交界面，支持：
+运行 `bun commit` 会启动交互式提交界面，支持：
 
 - 提交类型：feat, fix, docs, style, refactor, perf, test, build, ci, chore, revert
 - 作用域：自动读取 apps/ 和 packages/ 目录下的包名
@@ -207,13 +207,13 @@ Git pre-commit hook 通过 Husky + lint-staged 自动执行：
 
 - Node.js >= 24
 - npm >= 11
-- pnpm >= 10
-- 包管理器：pnpm@10.28.0
+- Bun >= 1.0.0
+- 包管理器：bun@1.3.8
 
 ## 关键配置文件
 
 - `turbo.json`: Turborepo 任务定义和依赖关系
-- `pnpm-workspace.yaml`: pnpm workspace 定义
+- `workspaces` 字段: Bun workspace 定义
 - `commitlint.config.js`: 提交信息规范配置
 - `lint-staged.config.js`: Git 暂存文件检查配置
 - `cspell.config.js`: 拼写检查配置
@@ -226,10 +226,10 @@ Git pre-commit hook 通过 Husky + lint-staged 自动执行：
 
 ```bash
 # 创建新的应用或包
-pnpm app:new
+bun app:new
 
 # 复制现有的应用或包
-pnpm app:copy
+bun app:copy
 ```
 
 ### 手动创建
@@ -245,12 +245,12 @@ pnpm app:copy
 配置包（vite-config, test-config, unocss-config）和工具库（utils）使用 **tsdown** 构建：
 
 ```bash
-pnpm --filter @repo/vite-config build
+bun --filter @repo/vite-config build
 ```
 
 UI 组件库和应用程序使用 **Vite** 构建：
 
 ```bash
-pnpm --filter @repo/ui build
-pnpm --filter @repo/template-app build
+bun --filter @repo/ui build
+bun --filter @repo/template-app build
 ```

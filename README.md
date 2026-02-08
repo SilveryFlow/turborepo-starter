@@ -1,10 +1,10 @@
-# pnpm + Turborepo Monorepo
+# Bun + Turborepo Monorepo
 
-基于 pnpm + Turborepo 构建的 Vue 3 Monorepo 项目模板，用于开发可共享的 UI 组件库和应用程序。
+基于 Bun + Turborepo 构建的 Vue 3 Monorebo 项目模板，用于开发可共享的 UI 组件库和应用程序。
 
 ## 特性
 
-- **pnpm** - 快速、节省磁盘空间的包管理器
+- **Bun** - 现代化的 JavaScript 运行时和包管理器
 - **Turborepo** - 高性能的 Monorepo 构建系统
 - **Vue 3** - 使用 Composition API + `<script setup>` + TypeScript
 - **Vite 7** - 极速的前端构建工具
@@ -16,7 +16,7 @@
 ## 项目结构
 
 ```
-pnpm-turborepo/
+bun-turborepo/
 ├── apps/
 │   └── template-app/          # Vue 3 应用程序模板
 ├── packages/
@@ -30,22 +30,21 @@ pnpm-turborepo/
 │   ├── utils/                 # 工具函数库（使用 tsdown 构建）
 │   └── ui/                    # Vue 3 UI 组件库（使用 Vite 构建）
 ├── turbo.json                 # Turborepo 配置
-├── pnpm-workspace.yaml        # pnpm workspace 配置
-└── package.json                # 根 package.json
+└── package.json                # Bun workspace 配置
 ```
 
 ## 快速开始
 
 ### 环境要求
 
-- Node.js >= 24
-- npm >= 11
-- pnpm >= 10
+- Node.js >= 22
+- Bun >= 1.0.0
+- 包管理器：bun@1.3.8
 
 ### 安装依赖
 
 ```bash
-pnpm install
+bun install
 ```
 
 ### 开发
@@ -53,17 +52,17 @@ pnpm install
 启动所有开发服务器：
 
 ```bash
-pnpm dev
+bun run dev
 ```
 
 启动特定包的开发服务器：
 
 ```bash
 # 仅启动 template-app
-pnpm --filter @repo/template-app dev
+bun run --filter @repo/template-app dev
 
 # 仅启动 ui 包的开发模式
-pnpm --filter @repo/ui dev
+bun run --filter @repo/ui dev
 ```
 
 ### 构建
@@ -71,36 +70,36 @@ pnpm --filter @repo/ui dev
 构建所有包：
 
 ```bash
-pnpm build
+bun run build
 ```
 
 构建特定包：
 
 ```bash
 # 仅构建 ui 包
-pnpm --filter @repo/ui build
+bun run --filter @repo/ui build
 
 # 构建特定包及其依赖
-pnpm --filter @repo/template-app... build
+bun run --filter @repo/template-app... build
 ```
 
 ## 可用命令
 
 ### 根级别命令
 
-| 命令              | 说明                           |
-| ----------------- | ------------------------------ |
-| `pnpm build`      | 构建所有包                     |
-| `pnpm dev`        | 启动所有开发服务器             |
-| `pnpm lint`       | Lint 所有包                    |
-| `pnpm format`     | 格式化所有代码                 |
-| `pnpm spell`      | 拼写检查                       |
-| `pnpm type-check` | 类型检查                       |
-| `pnpm test`       | 运行所有测试                   |
-| `pnpm test:watch` | 运行测试监视模式               |
-| `pnpm app:new`    | 创建新的 workspace（应用或包） |
-| `pnpm app:copy`   | 复制现有 workspace             |
-| `pnpm commit`     | 提交代码（使用 Commitizen）    |
+| 命令             | 说明                           |
+| ---------------- | ------------------------------ |
+| `bun run build`  | 构建所有包                     |
+| `bun dev`        | 启动所有开发服务器             |
+| `bun lint`       | Lint 所有包                    |
+| `bun format`     | 格式化所有代码                 |
+| `bun spell`      | 拼写检查                       |
+| `bun type-check` | 类型检查                       |
+| `bun run test`   | 运行所有测试                   |
+| `bun test:watch` | 运行测试监视模式               |
+| `bun app:new`    | 创建新的 workspace（应用或包） |
+| `bun app:copy`   | 复制现有 workspace             |
+| `bun commit`     | 提交代码（使用 Commitizen）    |
 
 ### 针对特定包的命令
 
@@ -108,23 +107,23 @@ pnpm --filter @repo/template-app... build
 
 ```bash
 # 仅在 ui 包中运行测试
-pnpm --filter @repo/ui test
+bun run --filter @repo/ui test
 
 # 仅类型检查 template-app
-pnpm --filter @repo/template-app type-check
+bun --filter @repo/template-app type-check
 
 # 仅 lint utils 包
-pnpm --filter @repo/utils lint
+bun --filter @repo/utils lint
 ```
 
 ### 运行单个测试文件
 
 ```bash
 # 在 utils 包中运行特定测试文件
-pnpm --filter @repo/utils test src/utils/date.test.ts
+bun run --filter @repo/utils test src/utils/date.test.ts
 
 # 在 template-app 中运行特定测试
-pnpm --filter @repo/template-app test src/components/__tests__/Button.test.ts
+bun run --filter @repo/template-app test src/components/__tests__/Button.test.ts
 ```
 
 ## 技术栈
@@ -157,10 +156,9 @@ pnpm --filter @repo/template-app test src/components/__tests__/Button.test.ts
   - 智能缓存和并行执行
   - 增量构建
   - 远程缓存支持
-- **pnpm** - 快速、节省磁盘空间的包管理器
+- **Bun** - 快速的 JavaScript 运行时和包管理器
   - 原生 workspace 支持
-  - 严格的依赖管理
-  - 节省磁盘空间
+  - 快速的依赖安装
 
 ## 包类型
 
@@ -210,7 +208,7 @@ pnpm --filter @repo/template-app test src/components/__tests__/Button.test.ts
 
 项目使用 Commitizen + Commitlint 进行提交规范检查。
 
-运行 `pnpm commit` 会启动交互式提交界面，支持：
+运行 `bun commit` 会启动交互式提交界面，支持：
 
 - 提交类型：feat, fix, docs, style, refactor, perf, test, build, ci, chore, revert
 - 作用域：自动读取 apps/ 和 packages/ 目录下的包名
@@ -239,10 +237,10 @@ Git pre-commit hook 通过 Husky + lint-staged 自动执行：
 
 ```bash
 # 创建新的应用或包
-pnpm app:new
+bun app:new
 
 # 复制现有的应用或包
-pnpm app:copy
+bun app:copy
 ```
 
 ### 手动创建
@@ -280,29 +278,34 @@ const count = ref(0)
 </template>
 ```
 
-## pnpm 优势
+## Bun 与内置命令的注意事项
 
-### 节省磁盘空间
+Bun 有一些内置命令会与 package.json 中的脚本冲突：
 
-pnpm 使用硬链接和符号链接来避免重复下载相同的包，相比 npm/yarn 可以节省大量磁盘空间。
+- `bun build` - Bun 的内置构建命令，会使用 Bun 的打包系统
+- `bun test` - Bun 的内置测试命令，会使用 Bun 的测试运行器
 
-### 严格的依赖管理
+因此，运行构建和测试时需要使用 `bun run` 来执行 package.json 中定义的脚本：
 
-pnpm 的严格模式确保只能访问 `package.json` 中声明的依赖，避免"幽灵依赖"问题。
+```bash
+# 正确：使用 turbo 运行构建
+bun run build
 
-### 更快的安装速度
+# 错误：会使用 Bun 的内置构建命令
+bun build
 
-得益于单仓库存储和高效的链接机制，pnpm 的安装速度通常比 npm/yarn 更快。
+# 正确：使用 turbo 运行测试
+bun run test
 
-### Monorepo 原生支持
+# 错误：会使用 Bun 的内置测试命令
+bun test
+```
 
-pnpm 内置 workspace 功能，与 Turborepo 配合使用效果更佳。
+其他命令（如 `dev`、`lint`、`format` 等）可以直接使用 `bun <command>` 的形式。
 
 ## 有用的链接
 
-了解更多关于 Turborepo 和 pnpm 的信息：
-
-### Turborepo
+了解更多关于 Turborepo 的信息：
 
 - [任务](https://turborepo.dev/docs/crafting-your-repository/running-tasks)
 - [缓存](https://turborepo.dev/docs/crafting-your-repository/caching)
@@ -310,13 +313,6 @@ pnpm 内置 workspace 功能，与 Turborepo 配合使用效果更佳。
 - [过滤](https://turborepo.dev/docs/crafting-your-repository/running-tasks#using-filters)
 - [配置选项](https://turborepo.dev/docs/reference/configuration)
 - [CLI 用法](https://turborepo.dev/docs/reference/command-line-reference)
-
-### pnpm
-
-- [官方文档](https://pnpm.io/)
-- [Workspace 功能](https://pnpm.io/workspaces)
-- [过滤语法](https://pnpm.io/filtering)
-- [与 npm 的差异](https://pnpm.io/npm-vs-pnpm)
 
 ## 许可证
 
