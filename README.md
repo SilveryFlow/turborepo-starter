@@ -5,7 +5,7 @@
 > - **main 分支（当前）**：使用 pnpm 作为包管理器，磁盘占用更小
 > - **bun 分支**：使用 Bun 作为包管理器，安装速度更快
 >
-> 切换分支命令：`git checkout bun` 或 `git checkout main`
+> 切换分支命令：`git switch bun` 或 `git switch main`
 
 基于 pnpm + Turborepo 构建的 Vue 3 Monorepo 项目模板，用于开发可共享的 UI 组件库和应用程序。
 

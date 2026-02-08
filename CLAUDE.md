@@ -6,6 +6,12 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 这是一个基于 pnpm + Turborepo 的 monorepo 项目，用于构建 Vue 3 应用程序和可共享的 UI 组件库。
 
+**分支版本：**
+- **main 分支（当前）**：使用 pnpm 作为包管理器，磁盘占用更小
+- **bun 分支**：使用 Bun 作为包管理器，安装速度更快
+
+切换分支命令：`git switch bun` 或 `git switch main`
+
 **技术栈：**
 
 - Vue 3 (Composition API + `<script setup>`)
@@ -27,13 +33,13 @@ pnpm build
 # 启动所有开发服务器
 pnpm dev
 
-# Lint 所有包
+# Lint 所有包（包括根目录）
 pnpm lint
 
-# 格式化所有代码
+# 格式化所有代码（包括根目录）
 pnpm format
 
-# 拼写检查
+# 拼写检查（包括根目录）
 pnpm spell
 
 # 类型检查
@@ -44,6 +50,15 @@ pnpm test
 
 # 运行测试监视模式
 pnpm test:watch
+
+# 清理所有包（dist + node_modules）
+pnpm clean
+
+# 仅清理依赖
+pnpm clean:deps
+
+# 仅清理构建产物
+pnpm clean:artifacts
 
 # 创建新的 workspace（应用或包）
 pnpm app:new
