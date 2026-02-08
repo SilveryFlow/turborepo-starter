@@ -1,4 +1,4 @@
-import { config as baseConfig } from './base.js'
+import { config as baseConfig } from './src/base.js'
 
 /**
  * ESLint 配置

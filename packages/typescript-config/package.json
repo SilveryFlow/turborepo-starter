@@ -8,6 +8,13 @@
     "format": "prettier --write --experimental-cli \"**/*.{js,ts,mjs,cjs,json,css,less,scss,vue,html,md}\" --ignore-unknown --cache --cache-location .prettiercache",
     "spell": "cspell \"**/*.{js,ts,mjs,cjs,json,css,less,scss,vue,html,md}\""
   },
+  "exports": {
+    "./tsconfig.base.json": "./src/tsconfig.base.json",
+    "./tsconfig.library.json": "./src/tsconfig.library.json",
+    "./tsconfig.node.json": "./src/tsconfig.node.json",
+    "./tsconfig.vitest.json": "./src/tsconfig.vitest.json",
+    "./tsconfig.vue.json": "./src/tsconfig.vue.json"
+  },
   "publishConfig": {
     "access": "public"
   },

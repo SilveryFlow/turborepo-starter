@@ -9,10 +9,10 @@
     "spell": "cspell \"**/*.{js,ts,mjs,cjs,json,css,less,scss,vue,html,md}\""
   },
   "exports": {
-    "./base": "./base.js",
-    "./vue": "./vue.js",
-    "./vitest": "./vitest.js",
-    "./vitest-vue": "./vitest-vue.js"
+    "./base": "./src/base.js",
+    "./vue": "./src/vue.js",
+    "./vitest": "./src/vitest.js",
+    "./vitest-vue": "./src/vitest-vue.js"
   },
   "devDependencies": {
     "@repo/prettier-config": "workspace:*",

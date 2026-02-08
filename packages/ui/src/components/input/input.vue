@@ -1,16 +1,7 @@
 <script setup lang="ts"></script>
 
 <template>
-  <el-input type="text" />
+  <el-input type="text" class="input--blue" />
 </template>
 
-<style scoped lang="scss">
-input {
-  outline: none;
-  border: none;
-  border-bottom: 1px solid #ccc;
-  padding: 0 10px;
-  font-size: 16px;
-  color: #333;
-}
-</style>
+<style scoped lang="scss"></style>

@@ -10,7 +10,7 @@
     "spell": "cspell \"**/*.{js,ts,mjs,cjs,json,css,less,scss,vue,html,md}\""
   },
   "exports": {
-    ".": "./index.js"
+    ".": "./src/index.js"
   },
   "devDependencies": {
     "@repo/eslint-config": "workspace:*",
