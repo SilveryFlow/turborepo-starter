@@ -40,6 +40,7 @@ yarn-error.log*
 # ai
 .cursor/
 .agents/
+.claude/
 
 
 # 缓存

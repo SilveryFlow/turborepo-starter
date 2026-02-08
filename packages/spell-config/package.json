@@ -7,7 +7,10 @@
   "scripts": {
     "lint": "eslint . --fix --cache",
     "format": "prettier --write --experimental-cli \"**/*.{js,ts,mjs,cjs,json,css,less,scss,vue,html,md}\" --ignore-unknown --cache --cache-location .prettiercache",
-    "spell": "cspell \"**/*.{js,ts,mjs,cjs,json,css,less,scss,vue,html,md}\""
+    "spell": "cspell \"**/*.{js,ts,mjs,cjs,json,css,less,scss,vue,html,md}\"",
+    "clean": "rimraf node_modules",
+    "clean:deps": "rimraf node_modules",
+    "clean:artifacts": "echo \"No build artifacts to clean\""
   },
   "exports": {
     ".": "./src/index.js"

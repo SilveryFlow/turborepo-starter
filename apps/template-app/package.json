@@ -18,7 +18,10 @@
     "lint:oxlint": "oxlint . --fix",
     "lint:eslint": "eslint . --fix --cache",
     "format": "prettier --write --experimental-cli \"**/*.{js,ts,mjs,cjs,json,css,less,scss,vue,html,md}\" --ignore-unknown --cache --cache-location .prettiercache",
-    "spell": "cspell \"**/*.{js,ts,mjs,cjs,json,css,less,scss,vue,html,md}\""
+    "spell": "cspell \"**/*.{js,ts,mjs,cjs,json,css,less,scss,vue,html,md}\"",
+    "clean": "run-s clean:artifacts clean:deps",
+    "clean:deps": "rimraf node_modules",
+    "clean:artifacts": "rimraf dist"
   },
   "dependencies": {
     "@csstools/normalize.css": "^12.1.1",

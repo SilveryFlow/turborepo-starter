@@ -20,7 +20,10 @@
     "spell": "cspell \"**/*.{js,ts,mjs,cjs,json,css,less,scss,vue,html,md}\"",
     "type-check": "tsc --noEmit",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "clean": "rimraf dist node_modules",
+    "clean:deps": "rimraf node_modules",
+    "clean:artifacts": "rimraf dist"
   },
   "devDependencies": {
     "@repo/eslint-config": "workspace:*",
