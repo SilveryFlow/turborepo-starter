@@ -5,7 +5,7 @@ const { type = 'button' } = defineProps<{
 </script>
 
 <template>
-  <button flex-center w-10 h-5 rounded-md :type="type">
+  <button rounded-md flex-center h-5 w-10 :type="type">
     <slot></slot>
   </button>
 </template>
