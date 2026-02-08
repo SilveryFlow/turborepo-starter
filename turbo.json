@@ -68,27 +68,12 @@
       "outputs": [],
       "cache": false
     },
-    "//#clean:root": {
-      "inputs": [],
-      "outputs": [],
-      "cache": false
-    },
     "clean:deps": {
       "inputs": [],
       "outputs": [],
       "cache": false
     },
-    "//#clean:root:deps": {
-      "inputs": [],
-      "outputs": [],
-      "cache": false
-    },
     "clean:artifacts": {
-      "inputs": [],
-      "outputs": [],
-      "cache": false
-    },
-    "//#clean:root:artifacts": {
       "inputs": [],
       "outputs": [],
       "cache": false
