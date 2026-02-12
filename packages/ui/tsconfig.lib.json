@@ -1,5 +1,5 @@
 {
-  "extends": "@repo/typescript-config/tsconfig.vue.json",
+  "extends": "@repo/typescript-config/vue",
   "include": ["env.d.ts", "src/**/*", "src/**/*.vue"],
   "exclude": ["src/**/__tests__/*"],
   "compilerOptions": {
