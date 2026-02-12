@@ -12,11 +12,10 @@
     "clean:artifacts": "echo \"No build artifacts to clean\""
   },
   "exports": {
-    "./tsconfig.base.json": "./src/tsconfig.base.json",
-    "./tsconfig.library.json": "./src/tsconfig.library.json",
-    "./tsconfig.node.json": "./src/tsconfig.node.json",
-    "./tsconfig.vitest.json": "./src/tsconfig.vitest.json",
-    "./tsconfig.vue.json": "./src/tsconfig.vue.json"
+    "./base": "./src/tsconfig.base.json",
+    "./library": "./src/tsconfig.library.json",
+    "./node": "./src/tsconfig.node.json",
+    "./vue": "./src/tsconfig.vue.json"
   },
   "publishConfig": {
     "access": "public"
