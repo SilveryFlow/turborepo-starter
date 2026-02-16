@@ -1,8 +1,8 @@
 {
   "name": "@repo/unocss-config",
   "version": "0.0.0",
-  "type": "module",
   "private": true,
+  "type": "module",
   "main": "./dist/index.mjs",
   "module": "./dist/index.mjs",
   "types": "./src/index.ts",
@@ -15,7 +15,6 @@
   "scripts": {
     "build": "tsdown",
     "lint": "eslint . --fix --cache",
-    "format": "prettier --write --experimental-cli \"**/*.{js,ts,mjs,cjs,json,css,less,scss,vue,html,md}\" --ignore-unknown --cache --cache-location .prettiercache",
     "spell": "cspell \"**/*.{js,ts,mjs,cjs,json,css,less,scss,vue,html,md}\"",
     "type-check": "tsc --noEmit",
     "clean": "rimraf dist node_modules",
@@ -24,7 +23,6 @@
   },
   "devDependencies": {
     "@repo/eslint-config": "workspace:*",
-    "@repo/prettier-config": "workspace:*",
     "@repo/spell-config": "workspace:*",
     "@repo/typescript-config": "workspace:*",
     "@types/node": "^24.10.9",

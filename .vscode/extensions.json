@@ -6,7 +6,6 @@
     "EditorConfig.EditorConfig",
     "oxc.oxc-vscode",
     "streetsidesoftware.code-spell-checker",
-    "vercel.turbo-vsc",
-    "esbenp.prettier-vscode"
+    "vercel.turbo-vsc"
   ]
 }

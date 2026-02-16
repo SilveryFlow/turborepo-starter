@@ -1,5 +1,5 @@
 import js from '@eslint/js'
-import eslintConfigPrettier from 'eslint-config-prettier'
+import skipFormatting from 'eslint-config-prettier/flat'
 import turboPlugin from 'eslint-plugin-turbo'
 import tseslint from 'typescript-eslint'
 import onlyWarn from 'eslint-plugin-only-warn'
@@ -15,8 +15,8 @@ export const config = [
   //TS规则
   ...tseslint.configs.recommended,
 
-  //关闭与Prettier冲突的规则
-  eslintConfigPrettier,
+  // 关闭与格式化工具冲突的规则
+  skipFormatting,
 
   //定义全局变量
   {
