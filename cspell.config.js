@@ -3,4 +3,5 @@ import repoConfig from '@repo/spell-config'
 
 export default defineConfig({
   ...repoConfig,
+  words: [...(repoConfig.words ?? []), 'autodocs'],
 })
