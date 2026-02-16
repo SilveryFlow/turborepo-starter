@@ -24,7 +24,7 @@ export default defineConfig(() => {
         sourcemap: true,
         rollupOptions: {
           // 确保外部化处理那些你不想打包进库的依赖
-          external: ['vue', 'unocss', 'element-plus'],
+          external: ['vue', 'unocss', /^element-plus(\/.*)?$/],
           output: {
             preserveModules: true,
           },
