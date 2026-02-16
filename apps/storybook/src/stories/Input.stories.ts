@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/vue3-vite'
 import { Input } from '@repo/ui'
+import { expect, within } from 'storybook/test'
 
 const meta = {
   title: 'UI/Input',
@@ -15,4 +16,8 @@ export const Default: Story = {
     components: { Input },
     template: '<Input />',
   }),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement)
+    await expect(canvas.getByRole('textbox')).toBeInTheDocument()
+  },
 }
