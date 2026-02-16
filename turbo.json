@@ -50,6 +50,15 @@
       "cache": false,
       "persistent": true
     },
+    "storybook": {
+      "cache": false,
+      "persistent": true,
+      "dependsOn": ["^build"]
+    },
+    "storybook:build": {
+      "dependsOn": ["^build"],
+      "outputs": ["dist/**"]
+    },
     "dev": {
       "cache": false,
       "persistent": true,

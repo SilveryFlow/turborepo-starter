@@ -15,6 +15,8 @@
     "type-check": "turbo run type-check",
     "test": "turbo run test",
     "test:watch": "turbo run test:watch",
+    "storybook": "turbo run storybook --filter=@repo/storybook",
+    "storybook:build": "turbo run storybook:build --filter=@repo/storybook",
     "clean": "turbo run clean",
     "clean:deps": "turbo run clean:deps",
     "clean:artifacts": "turbo run clean:artifacts",

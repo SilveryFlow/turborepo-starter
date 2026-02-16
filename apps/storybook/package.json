@@ -1,0 +1,39 @@
+{
+  "name": "@repo/storybook",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "storybook dev -p 6006 --ci",
+    "build": "storybook build --output-dir dist",
+    "storybook": "storybook dev -p 6006 --ci",
+    "storybook:build": "storybook build --output-dir dist",
+    "lint": "eslint . --fix --cache",
+    "type-check": "vue-tsc --noEmit -p tsconfig.app.json",
+    "spell": "cspell \"**/*.{js,ts,mjs,cjs,json,css,less,scss,vue,html,md,mdx}\"",
+    "clean": "rimraf dist node_modules",
+    "clean:deps": "rimraf node_modules",
+    "clean:artifacts": "rimraf dist"
+  },
+  "dependencies": {
+    "@repo/ui": "workspace:*",
+    "element-plus": "^2.13.2",
+    "vue": "^3.5.26"
+  },
+  "devDependencies": {
+    "@repo/eslint-config": "workspace:*",
+    "@repo/typescript-config": "workspace:*",
+    "@repo/unocss-config": "workspace:*",
+    "@storybook/addon-a11y": "^10.2.8",
+    "@storybook/addon-docs": "^10.2.8",
+    "@storybook/vue3": "^10.2.8",
+    "@storybook/vue3-vite": "^10.2.8",
+    "@types/node": "^24.10.9",
+    "eslint": "^9.39.2",
+    "storybook": "^10.2.8",
+    "typescript": "^5.9.3",
+    "unocss": "^66.6.0",
+    "vite": "^7.3.1",
+    "vue-tsc": "^3.2.2"
+  }
+}

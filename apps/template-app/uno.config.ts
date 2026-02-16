@@ -2,9 +2,8 @@ import { defineConfig } from 'unocss'
 import defaultConfig from '@repo/unocss-config'
 
 export default defineConfig({
-  presets: [...(defaultConfig.presets ?? [])],
-  transformers: [...(defaultConfig.transformers ?? [])],
-  shortcuts: {
-    ...defaultConfig.shortcuts,
+  ...defaultConfig,
+  content: {
+    filesystem: ['src/**/*.{vue,js,ts,jsx,tsx,md,mdx}', '../../packages/ui/src/**/*.{vue,js,ts,jsx,tsx,md,mdx}'],
   },
 })
