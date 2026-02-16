@@ -3,12 +3,12 @@
 > [!NOTE]
 > 本仓库提供两个版本：
 >
-> - **main 分支（当前）**：使用 pnpm 作为包管理器，磁盘占用更小
+> - **main 分支**：使用 pnpm 作为包管理器，磁盘占用更小
 > - **bun 分支**：使用 Bun 作为包管理器，安装速度更快
 >
 > 切换分支命令：`git switch bun` 或 `git switch main`
 
-基于 pnpm + Turborepo 构建的 Vue 3 Monorepo 项目模板，用于开发可共享的 UI 组件库和应用程序。
+基于 Turborepo 构建的 Vue 3 Monorepo 项目模板，用于开发可共享的 UI 组件库和应用程序。
 
 ## 特性
 
@@ -150,7 +150,7 @@ bun run --filter @repo/template-app test src/components/__tests__/Button.test.ts
 
 - **TypeScript** - JavaScript 的超集
 - **ESLint** - 代码 lint 工具
-- **Prettier** - 代码格式化工具
+- **oxfmt** - 代码格式化工具
 - **CSpell** - 代码拼写检查工具
 - **Vitest** - 单元测试框架
 - **Commitizen** - 规范化 Git 提交信息
@@ -236,7 +236,7 @@ chore(root): :hammer: 更新依赖版本
 Git pre-commit hook 通过 Husky + lint-staged 自动执行：
 
 - ESLint（自动修复）
-- Prettier（格式化）
+- oxfmt（格式化）
 - CSpell（拼写检查）
 
 ## 创建新包或应用
