@@ -1,6 +1,6 @@
 import { defineConfig, mergeConfig } from 'vite'
 import { resolve } from 'path'
-import { vuePluginPreset, createAlias, defaultCssOptions } from '@repo/vite-config'
+import { vuePluginPreset, createAlias, defaultCssOptions } from '@repo/config-vite'
 import UnoCSS from 'unocss/vite'
 
 // https://vite.dev/config/

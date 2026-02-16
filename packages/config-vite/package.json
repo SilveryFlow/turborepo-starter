@@ -1,5 +1,5 @@
 {
-  "name": "@repo/vite-config",
+  "name": "@repo/config-vite",
   "version": "0.0.0",
   "private": true,
   "type": "module",
@@ -22,8 +22,8 @@
     "clean:artifacts": "rimraf dist"
   },
   "devDependencies": {
-    "@repo/eslint-config": "workspace:*",
-    "@repo/typescript-config": "workspace:*",
+    "@repo/config-eslint": "workspace:*",
+    "@repo/config-typescript": "workspace:*",
     "@types/node": "^24.10.9",
     "@vitejs/plugin-vue": "^6.0.3",
     "eslint": "^9.39.2",

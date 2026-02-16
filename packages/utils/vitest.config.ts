@@ -1,3 +1,3 @@
-import { defineVitestConfig } from '@repo/test-config'
+import { defineVitestConfig } from '@repo/config-test'
 
 export default defineVitestConfig({})

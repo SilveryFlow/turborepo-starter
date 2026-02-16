@@ -1,5 +1,5 @@
 {
-  "extends": "@repo/typescript-config/node",
+  "extends": "@repo/config-typescript/node",
   "include": [
     "vite.config.*",
     "vitest.config.*",

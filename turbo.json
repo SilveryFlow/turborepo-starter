@@ -11,7 +11,7 @@
       "dependsOn": ["transit"]
     },
     "//#lint:root": {
-      "inputs": ["!apps", "!packages", "packages/eslint-config/base.js", "*.{js,ts,mjs,cjs,vue}"]
+      "inputs": ["!apps", "!packages", "packages/config-eslint/base.js", "*.{js,ts,mjs,cjs,vue}"]
     },
     "//#format": {
       "inputs": ["**/*.{js,ts,mjs,cjs,json,css,less,scss,vue,html,md}", "$TURBO_ROOT$/package.json"],
@@ -23,7 +23,7 @@
       "cache": false
     },
     "spell": {
-      "inputs": ["**/*.{js,ts,mjs,cjs,json,css,less,scss,vue,html,md}", "$TURBO_ROOT$/packages/spell-config/index.js"],
+      "inputs": ["**/*.{js,ts,mjs,cjs,json,css,less,scss,vue,html,md}", "$TURBO_ROOT$/packages/config-spell/index.js"],
       "outputs": []
     },
     "//#spell:root": {

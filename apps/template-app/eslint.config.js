@@ -1,4 +1,4 @@
-import { config as vitestVueConfig } from '@repo/eslint-config/vitest-vue'
+import { config as vitestVueConfig } from '@repo/config-eslint/vitest-vue'
 import pluginOxlint from 'eslint-plugin-oxlint'
 import autoImport from './.eslintrc-auto-import.json' with { type: 'json' }
 import unocss from '@unocss/eslint-config/flat'

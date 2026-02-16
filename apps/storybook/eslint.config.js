@@ -1,4 +1,4 @@
-import { config as vueConfig } from '@repo/eslint-config/vue'
+import { config as vueConfig } from '@repo/config-eslint/vue'
 
 export default [
   {

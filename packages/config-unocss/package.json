@@ -1,5 +1,5 @@
 {
-  "name": "@repo/unocss-config",
+  "name": "@repo/config-unocss",
   "version": "0.0.0",
   "private": true,
   "type": "module",
@@ -22,9 +22,9 @@
     "clean:artifacts": "rimraf dist"
   },
   "devDependencies": {
-    "@repo/eslint-config": "workspace:*",
-    "@repo/spell-config": "workspace:*",
-    "@repo/typescript-config": "workspace:*",
+    "@repo/config-eslint": "workspace:*",
+    "@repo/config-spell": "workspace:*",
+    "@repo/config-typescript": "workspace:*",
     "@types/node": "^24.10.9",
     "tsdown": "^0.20.1",
     "typescript": "^5.9.3",

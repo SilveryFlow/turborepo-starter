@@ -21,9 +21,9 @@ Use this as the execution playbook for build/test/lint tasks and code-change con
 - `apps/template-app`: Vue app (Vite + Vitest + Vue Router + Pinia).
 - `packages/ui`: UI component library built with Vite.
 - `packages/utils`: utility library built with tsdown.
-- `packages/eslint-config`: shared ESLint flat configs.
-- `packages/typescript-config`: strict shared TS configs.
-- `packages/test-config`: shared Vitest config factory.
+- `packages/config-eslint`: shared ESLint flat configs.
+- `packages/config-typescript`: strict shared TS configs.
+- `packages/config-test`: shared Vitest config factory.
 - `turbo.json`: task graph, dependency edges, cache behavior.
 
 ## Install / Bootstrap
@@ -91,7 +91,7 @@ pnpm --filter @repo/template-app test src/components/__tests__/HelloWorld.spec.t
 
 ## TypeScript Standards
 
-Shared baseline (`packages/typescript-config/src/tsconfig.base.json`) enforces:
+Shared baseline (`packages/config-typescript/src/tsconfig.base.json`) enforces:
 
 - `strict: true`
 - `noUncheckedIndexedAccess: true`

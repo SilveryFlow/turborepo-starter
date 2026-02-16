@@ -1,5 +1,5 @@
 {
-  "name": "@repo/spell-config",
+  "name": "@repo/config-spell",
   "version": "0.0.0",
   "private": true,
   "type": "module",
@@ -15,6 +15,6 @@
     "clean:artifacts": "echo \"No build artifacts to clean\""
   },
   "devDependencies": {
-    "@repo/eslint-config": "workspace:*"
+    "@repo/config-eslint": "workspace:*"
   }
 }
