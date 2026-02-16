@@ -2,12 +2,12 @@
 export default {
   '**/*.{js,ts,vue,jsx,tsx}': [
     'eslint --fix --cache',
-    'prettier --write --experimental-cli --cache',
+    'oxfmt --ignore-path .oxfmtignore --no-error-on-unmatched-pattern',
     'cspell --no-exit-code --no-must-find-files --cache',
   ],
   '**/*.{css,scss,html,json}': [
-    'prettier --write --experimental-cli --cache',
+    'oxfmt --ignore-path .oxfmtignore --no-error-on-unmatched-pattern',
     'cspell --no-exit-code --no-must-find-files --cache',
   ],
-  '**/*.md': ['prettier --write --experimental-cli --cache'],
+  '**/*.md': ['oxfmt --ignore-path .oxfmtignore --no-error-on-unmatched-pattern'],
 }

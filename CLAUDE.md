@@ -4,7 +4,14 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## 项目概述
 
-这是一个基于 Bun + Turborepo 的 monorepo 项目，用于构建 Vue 3 应用程序和可共享的 UI 组件库。
+这是一个基于 pnpm + Turborepo 的 monorepo 项目，用于构建 Vue 3 应用程序和可共享的 UI 组件库。
+
+**分支版本：**
+
+- **main 分支（当前）**：使用 pnpm 作为包管理器，磁盘占用更小
+- **bun 分支**：使用 Bun 作为包管理器，安装速度更快
+
+切换分支命令：`git switch bun` 或 `git switch main`
 
 **技术栈：**
 

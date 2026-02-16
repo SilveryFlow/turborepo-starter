@@ -1,0 +1,45 @@
+# --- Dependencies and build ---
+node_modules/
+**/node_modules/**
+dist/
+**/dist/**
+dist-ssr/
+**/dist-ssr/**
+*.local
+
+# --- Turborepo and cache ---
+.turbo/
+.cache/
+.temp/
+*.tsbuildinfo
+
+# --- Tests ---
+coverage/
+test-results/
+__snapshots__/
+
+# --- Static assets ---
+public/
+*.min.js
+*.min.css
+*.svg
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.ico
+
+# --- Config and lock files ---
+pnpm-lock.yaml
+package-lock.json
+yarn.lock
+
+# --- IDE and system ---
+.idea/
+.DS_Store
+*.log
+.eslintcache
+
+# --- Auto-generated files ---
+auto-imports.d.ts
+components.d.ts

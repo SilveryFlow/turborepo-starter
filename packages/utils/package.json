@@ -1,8 +1,8 @@
 {
   "name": "@repo/utils",
   "version": "0.0.1",
-  "type": "module",
   "private": true,
+  "type": "module",
   "main": "./dist/index.mjs",
   "module": "./dist/index.mjs",
   "types": "./src/index.ts",
@@ -16,7 +16,6 @@
     "build": "tsdown",
     "dev": "tsdown --watch",
     "lint": "eslint . --fix --cache",
-    "format": "prettier --write --experimental-cli \"**/*.{js,ts,mjs,cjs,json,css,less,scss,vue,html,md}\" --ignore-unknown --cache --cache-location .prettiercache",
     "spell": "cspell \"**/*.{js,ts,mjs,cjs,json,css,less,scss,vue,html,md}\"",
     "type-check": "tsc --noEmit",
     "test": "vitest run",
@@ -25,9 +24,11 @@
     "clean:deps": "rimraf node_modules",
     "clean:artifacts": "rimraf dist"
   },
+  "dependencies": {
+    "dayjs": "^1.11.19"
+  },
   "devDependencies": {
     "@repo/eslint-config": "workspace:*",
-    "@repo/prettier-config": "workspace:*",
     "@repo/spell-config": "workspace:*",
     "@repo/test-config": "workspace:*",
     "@repo/typescript-config": "workspace:*",
@@ -35,8 +36,5 @@
     "tsdown": "^0.20.1",
     "typescript": "^5.9.3",
     "vitest": "^4.0.18"
-  },
-  "dependencies": {
-    "dayjs": "^1.11.19"
   }
 }

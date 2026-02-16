@@ -1,6 +1,5 @@
 import { defineConfigWithVueTs, vueTsConfigs } from '@vue/eslint-config-typescript'
 import pluginVue from 'eslint-plugin-vue'
-import skipFormatting from '@vue/eslint-config-prettier/skip-formatting'
 import { config as baseConfig } from './base.js'
 
 /**
@@ -24,7 +23,4 @@ export const config = defineConfigWithVueTs(
       'vue/multi-word-component-names': 'warn', // 多单词组件名称警告
     },
   },
-
-  // 跳过格式化（交给 Prettier）
-  skipFormatting,
 )

@@ -1,16 +1,9 @@
 {
   "name": "@repo/typescript-config",
   "version": "0.0.0",
-  "type": "module",
   "private": true,
   "license": "MIT",
-  "scripts": {
-    "format": "prettier --write --experimental-cli \"**/*.{js,ts,mjs,cjs,json,css,less,scss,vue,html,md}\" --ignore-unknown --cache --cache-location .prettiercache",
-    "spell": "cspell \"**/*.{js,ts,mjs,cjs,json,css,less,scss,vue,html,md}\"",
-    "clean": "rimraf node_modules",
-    "clean:deps": "rimraf node_modules",
-    "clean:artifacts": "echo \"No build artifacts to clean\""
-  },
+  "type": "module",
   "exports": {
     "./base": "./src/tsconfig.base.json",
     "./library": "./src/tsconfig.library.json",
@@ -19,6 +12,12 @@
   },
   "publishConfig": {
     "access": "public"
+  },
+  "scripts": {
+    "spell": "cspell \"**/*.{js,ts,mjs,cjs,json,css,less,scss,vue,html,md}\"",
+    "clean": "rimraf node_modules",
+    "clean:deps": "rimraf node_modules",
+    "clean:artifacts": "echo \"No build artifacts to clean\""
   },
   "devDependencies": {
     "@tsconfig/node24": "^24.0.4",

@@ -13,22 +13,14 @@
     "//#lint:root": {
       "inputs": ["!apps", "!packages", "packages/eslint-config/base.js", "*.{js,ts,mjs,cjs,vue}"]
     },
-    "format": {
-      "inputs": [
-        "**/*.{js,ts,mjs,cjs,json,css,less,scss,vue,html,md}",
-        "$TURBO_ROOT$/packages/prettier-config/index.js"
-      ],
+    "//#format": {
+      "inputs": ["**/*.{js,ts,mjs,cjs,json,css,less,scss,vue,html,md}", "$TURBO_ROOT$/package.json"],
       "outputs": []
     },
-    "//#format:root": {
-      "inputs": [
-        "!apps",
-        "!packages",
-        "packages/prettier-config/index.js",
-        "*.{js,ts,mjs,cjs,json,css,less,scss,vue,html,md}",
-        "doc/**/*.md"
-      ],
-      "outputs": []
+    "//#format:fix": {
+      "inputs": ["**/*.{js,ts,mjs,cjs,json,css,less,scss,vue,html,md}", "$TURBO_ROOT$/package.json"],
+      "outputs": [],
+      "cache": false
     },
     "spell": {
       "inputs": ["**/*.{js,ts,mjs,cjs,json,css,less,scss,vue,html,md}", "$TURBO_ROOT$/packages/spell-config/index.js"],
