@@ -3,7 +3,7 @@
 typescript-config应该分文件进行不同环境的tsconfig配置
 
 ```bash
-packages/typescript-config/
+packages/config-typescript/
 ├── package.json
 ├── tsconfig.base.json			# 公共基础配置
 ├── tsconfig.vue.json    		# apps/Vue 业务代码用

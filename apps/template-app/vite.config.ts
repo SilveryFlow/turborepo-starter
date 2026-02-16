@@ -6,7 +6,7 @@ import {
   defaultBuildOptions,
   defaultCssOptions,
   defaultServeOptions,
-} from '@repo/vite-config'
+} from '@repo/config-vite'
 
 // https://vite.dev/config/
 export default defineConfig(configEnv => {

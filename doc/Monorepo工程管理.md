@@ -243,7 +243,7 @@ pnpm -C 子包路径 [...]
 typescript-config应该分文件进行不同环境的tsconfig配置
 
 ```bash
-packages/typescript-config/
+packages/config-typescript/
 ├── package.json
 ├── tsconfig.base.json			# 公共基础配置
 ├── tsconfig.vue.json    		# apps/Vue 业务代码用
@@ -1168,7 +1168,7 @@ turbo调度默认只会调度位于workspace的内容，也就是`apps/**`和`pa
 
 ### 3.5 vite共享包
 
-在packages/vite-config运行命令
+在packages/config-vite运行命令
 
 ```bash
 pnpm init --init-type module && pnpm i -D typescript && pnpm exec tsc --init

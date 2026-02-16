@@ -1,5 +1,5 @@
 {
-  "extends": "@repo/typescript-config/node",
+  "extends": "@repo/config-typescript/node",
   "compilerOptions": {
     "rootDir": "src",
     "types": ["node"]

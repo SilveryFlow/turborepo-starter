@@ -1,4 +1,4 @@
-import { config as vitestVueConfig } from '@repo/eslint-config/vitest-vue'
+import { config as vitestVueConfig } from '@repo/config-eslint/vitest-vue'
 
 /**
  * ESLint 配置

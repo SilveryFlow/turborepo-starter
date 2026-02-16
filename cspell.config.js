@@ -1,5 +1,5 @@
 import { defineConfig } from 'cspell'
-import repoConfig from '@repo/spell-config'
+import repoConfig from '@repo/config-spell'
 
 export default defineConfig({
   ...repoConfig,

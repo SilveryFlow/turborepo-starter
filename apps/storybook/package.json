@@ -21,9 +21,9 @@
     "vue": "^3.5.26"
   },
   "devDependencies": {
-    "@repo/eslint-config": "workspace:*",
-    "@repo/typescript-config": "workspace:*",
-    "@repo/unocss-config": "workspace:*",
+    "@repo/config-eslint": "workspace:*",
+    "@repo/config-typescript": "workspace:*",
+    "@repo/config-unocss": "workspace:*",
     "@storybook/addon-a11y": "^10.2.8",
     "@storybook/addon-docs": "^10.2.8",
     "@storybook/addon-vitest": "^10.2.8",

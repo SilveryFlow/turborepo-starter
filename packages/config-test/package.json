@@ -1,5 +1,5 @@
 {
-  "name": "@repo/test-config",
+  "name": "@repo/config-test",
   "version": "0.0.0",
   "private": true,
   "type": "module",
@@ -22,9 +22,9 @@
     "clean:artifacts": "rimraf dist"
   },
   "devDependencies": {
-    "@repo/eslint-config": "workspace:*",
-    "@repo/spell-config": "workspace:*",
-    "@repo/typescript-config": "workspace:*",
+    "@repo/config-eslint": "workspace:*",
+    "@repo/config-spell": "workspace:*",
+    "@repo/config-typescript": "workspace:*",
     "@types/node": "^24.10.9",
     "jsdom": "^27.4.0",
     "tsdown": "^0.20.1",

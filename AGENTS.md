@@ -17,11 +17,13 @@ This document is derived from executable configs (`package.json`, `turbo.json`, 
 
 ## Layout
 
-- `apps/template-app`: Vue 3 application.
-- `packages/ui`: Vue 3 UI library.
-- `packages/utils`: shared utilities.
-- `packages/*-config`: shared config packages.
-- `turbo.json`: task graph, dependencies, cache behavior.
+- `apps/template-app`: Vue app (Vite + Vitest + Vue Router + Pinia).
+- `packages/ui`: UI component library built with Vite.
+- `packages/utils`: utility library built with tsdown.
+- `packages/config-eslint`: shared ESLint flat configs.
+- `packages/config-typescript`: strict shared TS configs.
+- `packages/config-test`: shared Vitest config factory.
+- `turbo.json`: task graph, dependency edges, cache behavior.
 
 ## Setup
 
@@ -99,7 +101,7 @@ bun run --filter @repo/template-app test src/components/__tests__/HelloWorld.spe
 
 ## TypeScript standards
 
-From shared tsconfig base:
+Shared baseline (`packages/config-typescript/src/tsconfig.base.json`) enforces:
 
 - `strict: true`
 - `noUncheckedIndexedAccess: true`
