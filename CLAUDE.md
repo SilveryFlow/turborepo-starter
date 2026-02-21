@@ -2,6 +2,23 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## Environment Rule: mise-first toolchain (MANDATORY)
+
+- This machine uses `mise` as the single source of truth for runtimes and global CLIs.
+- Never use `npm i -g` or `pnpm add -g` for tool installation.
+- Install global CLIs via `mise` only: `mise use -g npm:<package>@<version>`.
+- Prefer execution via `mise x ... -- <cmd>` / `mise exec -- <cmd>` when possible.
+- Treat `mise` state-changing commands as exclusive/serial:
+  - `mise use`, `mise install`, `mise reshim` MUST NOT run in parallel.
+- Avoid running `mise reshim` unless explicitly required by the user.
+- If a required CLI is missing, first check `mise which <cmd>` and suggest a `mise use -g npm:<pkg>` fix.
+
+## Package Manager: pnpm
+
+- Package manager on this branch: `pnpm` (`packageManager: pnpm@10.28.0`).
+- Use `pnpm` for all package operations (install, add, run, etc.).
+- Workspace filter syntax: `pnpm --filter <package-name> <command>`.
+
 ## 项目概述
 
 这是一个基于 pnpm + Turborepo 的 monorepo 项目，用于构建 Vue 3 应用程序和可共享的 UI 组件库。

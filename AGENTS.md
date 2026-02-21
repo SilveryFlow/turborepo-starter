@@ -3,11 +3,27 @@
 Guidance for autonomous coding agents operating in this repository.
 Use this as the execution playbook for build/test/lint tasks and code-change conventions.
 
+## Environment Rule: mise-first toolchain (MANDATORY)
+
+- This machine uses `mise` as the single source of truth for runtimes and global CLIs.
+- Never use `npm i -g` or `pnpm add -g` for tool installation.
+- Install global CLIs via `mise` only: `mise use -g npm:<package>@<version>`.
+- Prefer execution via `mise x ... -- <cmd>` / `mise exec -- <cmd>` when possible.
+- Treat `mise` state-changing commands as exclusive/serial:
+  - `mise use`, `mise install`, `mise reshim` MUST NOT run in parallel.
+- Avoid running `mise reshim` unless explicitly required by the user.
+- If a required CLI is missing, first check `mise which <cmd>` and suggest a `mise use -g npm:<pkg>` fix.
+
+## Package Manager: pnpm
+
+- Package manager on this branch: `pnpm` (`packageManager: pnpm@10.28.0`).
+- Use `pnpm` for all package operations (install, add, run, etc.).
+- Workspace filter syntax: `pnpm --filter <package-name> <command>`.
+
 ## Source of Truth
 
 - Trust executable config first: `package.json`, `turbo.json`, workspace `package.json` scripts.
 - Treat prose docs as secondary when conflicts appear.
-- Package manager on this branch: `pnpm` (`packageManager: pnpm@10.28.0`).
 
 ## Repository Profile
 
