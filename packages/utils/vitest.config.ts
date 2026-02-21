@@ -1,3 +1,9 @@
-import { defineVitestConfig } from '@repo/config-test'
+import { fileURLToPath } from 'node:url'
+import { createVitestConfig } from '@repo/config-test'
 
-export default defineVitestConfig({})
+export default createVitestConfig({
+  viteConfig: {},
+  test: {
+    root: fileURLToPath(new URL('./', import.meta.url)),
+  },
+})

@@ -2,14 +2,33 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## Environment Rule: mise-first toolchain (MANDATORY)
+
+- This machine uses `mise` as the single source of truth for runtimes and global CLIs.
+- Never use `npm i -g` or `bun add -g` for tool installation.
+- Install global CLIs via `mise` only: `mise use -g npm:<package>@<version>`.
+- Prefer execution via `mise x ... -- <cmd>` / `mise exec -- <cmd>` when possible.
+- Treat `mise` state-changing commands as exclusive/serial:
+  - `mise use`, `mise install`, `mise reshim` MUST NOT run in parallel.
+- Avoid running `mise reshim` unless explicitly required by the user.
+- If a required CLI is missing, first check `mise which <cmd>` and suggest a `mise use -g npm:<pkg>` fix.
+
+## Package Manager: Bun
+
+- Package manager on this branch: Bun (`packageManager: bun@1.3.8`).
+- Use `bun` for all package operations (install, add, run, etc.).
+- Workspace filter syntax: `bun run --filter <package-name> <command>`.
+- For Bun package executors, prefer `bun x <pkg>` (do not assume `bunx` command exists).
+- Important caveat: Use `bun run build` and `bun run test` (avoid bare `bun build` / `bun test`).
+
 ## 项目概述
 
-这是一个基于 pnpm + Turborepo 的 monorepo 项目，用于构建 Vue 3 应用程序和可共享的 UI 组件库。
+这是一个基于 Bun + Turborepo 的 monorepo 项目，用于构建 Vue 3 应用程序和可共享的 UI 组件库。
 
 **分支版本：**
 
-- **main 分支（当前）**：使用 pnpm 作为包管理器，磁盘占用更小
-- **bun 分支**：使用 Bun 作为包管理器，安装速度更快
+- **main 分支**：使用 pnpm 作为包管理器，磁盘占用更小
+- **bun 分支（当前）**：使用 Bun 作为包管理器，安装速度更快
 
 切换分支命令：`git switch bun` 或 `git switch main`
 

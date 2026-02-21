@@ -3,17 +3,29 @@
 Instructions for coding agents working in this repository.
 This document is derived from executable configs (`package.json`, `turbo.json`, eslint/ts/vitest configs).
 
+## Environment Rule: mise-first toolchain (MANDATORY)
+
+- This machine uses `mise` as the single source of truth for runtimes and global CLIs.
+- Never use `npm i -g` or `bun add -g` for tool installation.
+- Install global CLIs via `mise` only: `mise use -g npm:<package>@<version>`.
+- Prefer execution via `mise x ... -- <cmd>` / `mise exec -- <cmd>` when possible.
+- Treat `mise` state-changing commands as exclusive/serial:
+  - `mise use`, `mise install`, `mise reshim` MUST NOT run in parallel.
+- Avoid running `mise reshim` unless explicitly required by the user.
+- If a required CLI is missing, first check `mise which <cmd>` and suggest a `mise use -g npm:<pkg>` fix.
+
+## Package Manager: Bun
+
+- Package manager on this branch: Bun (`packageManager: bun@1.3.8`).
+- Use `bun` for all package operations (install, add, run, etc.).
+- Workspace filter syntax: `bun run --filter <package-name> <command>`.
+- For Bun package executors, prefer `bun x <pkg>` (do not assume `bunx` command exists).
+- Important caveat: Use `bun run build` and `bun run test` (avoid bare `bun build` / `bun test`).
+
 ## Source of truth
 
 - Treat scripts/config files as authoritative.
 - If prose docs conflict with scripts/config, follow scripts/config.
-
-## Repository profile
-
-- Monorepo: Turborepo + Bun workspaces.
-- Workspaces: `apps/*`, `packages/*`.
-- Package manager for this branch: Bun (`packageManager: bun@1.3.8`).
-- Engines: Bun >= 1.0.0, Node >= 22.
 
 ## Layout
 
