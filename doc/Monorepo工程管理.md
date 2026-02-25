@@ -1119,7 +1119,10 @@ components.d.ts
 {
   "tasks": {
     "format": {
-      "inputs": ["**/*.{js,ts,mjs,cjs,json,css,less,scss,vue,html,md}", "../../packages/prettier-config/index.js"],
+      "inputs": [
+        "**/*.{js,ts,mjs,cjs,json,css,less,scss,vue,html,md}",
+        "../../packages/prettier-config/index.js"
+      ],
       "outputs": []
     },
     "//#format:root": {
@@ -1868,7 +1871,18 @@ export default defineConfig({
     '**/*.md',
     '**/stats.html',
   ],
-  dictionaries: ['typescript', 'node', 'html', 'css', 'bash', 'misc', 'npm', 'fonts', 'filetypes', 'softwareTerms'],
+  dictionaries: [
+    'typescript',
+    'node',
+    'html',
+    'css',
+    'bash',
+    'misc',
+    'npm',
+    'fonts',
+    'filetypes',
+    'softwareTerms',
+  ],
   words: [
     'turborepo',
     'pnpm',
@@ -2152,7 +2166,11 @@ export default defineConfig({
     types: [
       { value: 'feat', name: 'feat:     ✨ 新增功能 | A new feature', emoji: ':sparkles:' },
       { value: 'fix', name: 'fix:      🐛 修复缺陷 | A bug fix', emoji: ':bug:' },
-      { value: 'docs', name: 'docs:     📝 文档更新 | Documentation only changes', emoji: ':memo:' },
+      {
+        value: 'docs',
+        name: 'docs:     📝 文档更新 | Documentation only changes',
+        emoji: ':memo:',
+      },
       {
         value: 'style',
         name: 'style:    💄 代码格式 | Changes that do not affect the meaning of the code',
@@ -2163,7 +2181,11 @@ export default defineConfig({
         name: 'refactor: ♻️ 代码重构 | A code change that neither fixes a bug nor adds a feature',
         emoji: ':recycle:',
       },
-      { value: 'perf', name: 'perf:     ⚡️ 性能提升 | A code change that improves performance', emoji: ':zap:' },
+      {
+        value: 'perf',
+        name: 'perf:     ⚡️ 性能提升 | A code change that improves performance',
+        emoji: ':zap:',
+      },
       {
         value: 'test',
         name: 'test:     ✅ 测试相关 | Adding missing tests or correcting existing tests',
@@ -2317,7 +2339,10 @@ lint-staged的--verbose参数设置即使任务成功也显示任务输出。默
       "prettier --write --experimental-cli",
       "cspell --no-exit-code --no-must-find-files"
     ],
-    "**/*.{css,scss,html,json}": ["prettier --write --experimental-cli", "cspell --no-exit-code --no-must-find-files"],
+    "**/*.{css,scss,html,json}": [
+      "prettier --write --experimental-cli",
+      "cspell --no-exit-code --no-must-find-files"
+    ],
     "**/*.md": ["prettier --write --experimental-cli"]
   }
 }
@@ -2333,7 +2358,10 @@ export default {
     'prettier --write --experimental-cli',
     'cspell --no-exit-code --no-must-find-files',
   ],
-  '**/*.{css,scss,html,json}': ['prettier --write --experimental-cli', 'cspell --no-exit-code --no-must-find-files'],
+  '**/*.{css,scss,html,json}': [
+    'prettier --write --experimental-cli',
+    'cspell --no-exit-code --no-must-find-files',
+  ],
   '**/*.md': ['prettier --write --experimental-cli'],
 }
 ```

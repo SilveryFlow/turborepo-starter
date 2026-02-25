@@ -44,8 +44,14 @@ export interface CreateVitestConfigOptions {
  * 2) 共享 test 默认值
  * 3) 用户传入的 `test` 与 `overrides`（最高优先级）
  */
-export function createVitestConfig({ viteConfig, test, overrides = {} }: CreateVitestConfigOptions) {
-  const mergedTestConfig = test ? mergeConfig(vitestDefaultTestConfig, test) : vitestDefaultTestConfig
+export function createVitestConfig({
+  viteConfig,
+  test,
+  overrides = {},
+}: CreateVitestConfigOptions) {
+  const mergedTestConfig = test
+    ? mergeConfig(vitestDefaultTestConfig, test)
+    : vitestDefaultTestConfig
   const vitestOverrides = defineConfig({
     ...overrides,
     test: mergedTestConfig,

@@ -1,4 +1,5 @@
 import { config as vitestVueConfig } from '@repo/config-eslint/vitest-vue'
+import pluginOxlint from 'eslint-plugin-oxlint'
 
 /**
  * ESLint 配置
@@ -18,4 +19,6 @@ export default [
   },
 
   ...vitestVueConfig,
+
+  ...pluginOxlint.buildFromOxlintConfigFile('.oxlintrc.json'),
 ]
