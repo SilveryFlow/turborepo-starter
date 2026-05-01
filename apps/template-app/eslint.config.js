@@ -34,5 +34,5 @@ export default [
   ...vitestVueConfig,
 
   // Oxlint 与 .oxlintrc.json 同源配置
-  ...pluginOxlint.buildFromOxlintConfigFile('.oxlintrc.json'),
+  ...pluginOxlint.buildFromOxlintConfigFile('../../.oxlintrc.json'),
 ]

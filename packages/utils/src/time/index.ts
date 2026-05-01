@@ -1,9 +1,8 @@
-import dayjs from 'dayjs'
-
 /**
  * 获取当前时间，格式为YYYY-MM-DD HH:mm:ss
- * @returns 当前时间
  */
 export const getNow = () => {
-  return dayjs().format('YYYY-MM-DD HH:mm:ss')
+  const now = new Date()
+  const pad = (n: number) => String(n).padStart(2, '0')
+  return `${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())} ${pad(now.getHours())}:${pad(now.getMinutes())}:${pad(now.getSeconds())}`
 }

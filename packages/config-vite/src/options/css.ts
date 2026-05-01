@@ -1,11 +1,25 @@
 import type { CSSOptions } from 'vite'
 
-export const defaultCssOptions: CSSOptions = {
-  devSourcemap: true,
-  preprocessorOptions: {
-    scss: {
-      // 自动注入全局样式变量（如需要可启用）
-      additionalData: '@use "@/assets/styles/scss-variables.scss" as *;',
-    },
-  },
+export interface CreateCssOptions {
+  scssVariablesPath?: string | false
 }
+
+export const createCssOptions = (options?: CreateCssOptions): CSSOptions => {
+  const scssPath = options?.scssVariablesPath
+  const additionalData =
+    scssPath === false ? '' : `@use "${scssPath ?? '@/assets/styles/scss-variables.scss'}" as *;`
+
+  return {
+    devSourcemap: true,
+    preprocessorOptions: {
+      scss: additionalData
+        ? {
+            additionalData,
+          }
+        : undefined,
+    },
+  }
+}
+
+/** @deprecated Use createCssOptions() instead */
+export const defaultCssOptions: CSSOptions = createCssOptions()

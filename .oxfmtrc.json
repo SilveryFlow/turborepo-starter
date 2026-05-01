@@ -11,5 +11,32 @@
   "proseWrap": "preserve",
   "tabWidth": 2,
   "useTabs": false,
-  "trailingComma": "all"
+  "trailingComma": "all",
+  "ignorePatterns": [
+    "dist/**",
+    "dist-ssr/**",
+    "*.local",
+    ".turbo/**",
+    ".cache/**",
+    ".temp/**",
+    "*.tsbuildinfo",
+    "coverage/**",
+    "test-results/**",
+    "__snapshots__/**",
+    "public/**",
+    "*.min.js",
+    "*.min.css",
+    "*.svg",
+    "*.png",
+    "*.jpg",
+    "*.jpeg",
+    "*.gif",
+    "*.ico",
+    ".idea/**",
+    ".DS_Store",
+    "*.log",
+    ".eslintcache",
+    "auto-imports.d.ts",
+    "components.d.ts"
+  ]
 }

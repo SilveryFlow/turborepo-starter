@@ -1,17 +1,18 @@
 import { defineConfig, mergeConfig } from 'vite'
 import { resolve } from 'path'
-import { vuePluginPreset, createAlias, defaultCssOptions } from '@repo/config-vite'
+import vue from '@vitejs/plugin-vue'
+import { createAlias, createCssOptions } from '@repo/config-vite'
 import UnoCSS from 'unocss/vite'
 
 // https://vite.dev/config/
 export default defineConfig(() => {
   return mergeConfig(
     defineConfig({
-      plugins: [...vuePluginPreset(), UnoCSS()],
+      plugins: [vue(), UnoCSS()],
       resolve: {
         alias: createAlias(import.meta.url),
       },
-      css: defaultCssOptions,
+      css: createCssOptions(),
     }),
     defineConfig({
       build: {
@@ -23,7 +24,6 @@ export default defineConfig(() => {
         },
         sourcemap: true,
         rollupOptions: {
-          // 确保外部化处理那些你不想打包进库的依赖
           external: ['vue', 'unocss', /^element-plus(\/.*)?$/],
           output: {
             preserveModules: true,

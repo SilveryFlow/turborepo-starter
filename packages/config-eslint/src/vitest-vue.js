@@ -16,6 +16,7 @@ export const config = [
     },
     rules: {
       ...pluginVitest.configs.recommended.rules,
+      'vitest/no-focused-tests': 'warn', // 不允许提交带有 .only 的测试
     },
   },
 ]

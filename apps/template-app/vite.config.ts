@@ -1,54 +1,93 @@
+import vue from '@vitejs/plugin-vue'
+import vueDevTools from 'vite-plugin-vue-devtools'
+import AutoImport from 'unplugin-auto-import/vite'
+import Components from 'unplugin-vue-components/vite'
+import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
+import Icons from 'unplugin-icons/vite'
+import IconsResolver from 'unplugin-icons/resolver'
 import { defineConfig, loadEnv, mergeConfig } from 'vite'
 import {
-  vuePluginPreset,
   vitePluginPreset,
   createAlias,
-  defaultBuildOptions,
-  defaultCssOptions,
-  defaultServeOptions,
+  createBuildOptions,
+  createCssOptions,
+  createServeOptions,
 } from '@repo/config-vite'
 
 // https://vite.dev/config/
 export default defineConfig(configEnv => {
-  const { mode } = configEnv
+  const { mode, command } = configEnv
   const env = loadEnv(mode, process.cwd(), '')
   const port = Number(env.VITE_PORT) || 5173
   const API_BASE = env.VITE_BASE_API || '/api'
   const WS_BASE = env.VITE_WEBSOCKET_BASE_API || '/ws'
   const UE_BASE = env.VITE_UE_BASE_API || '/ue'
+  const API_TARGET = env.VITE_API_TARGET || 'http://127.0.0.1:10002'
+  const WS_TARGET = env.VITE_WS_TARGET || 'ws://127.0.0.1:10002'
+  const UE_TARGET = env.VITE_UE_TARGET || 'http://127.0.0.1:901'
 
   return mergeConfig(
     defineConfig({
-      plugins: [...vuePluginPreset(), ...vitePluginPreset()],
+      plugins: [
+        vue(),
+        vueDevTools(),
+        AutoImport({
+          imports: [
+            'vue',
+            'vue-router',
+            'pinia',
+            '@vueuse/core',
+            { '@vueuse/router': ['useRouteHash', 'useRouteQuery', 'useRouteParams'] },
+          ],
+          resolvers: [ElementPlusResolver()],
+          dts: 'src/types/auto-imports.d.ts',
+          eslintrc: {
+            enabled: true,
+          },
+        }),
+        Components({
+          resolvers: [
+            ElementPlusResolver({ importStyle: 'sass' }),
+            IconsResolver({
+              enabledCollections: ['ep'],
+            }),
+            (componentName: string) => {
+              if (componentName === 'VChart') {
+                return { name: 'default', from: 'vue-echarts' }
+              }
+            },
+          ],
+          dts: 'src/types/components.d.ts',
+        }),
+        Icons({ autoInstall: false }),
+        ...vitePluginPreset({ command }),
+      ],
       resolve: {
         alias: createAlias(import.meta.url),
       },
-      build: defaultBuildOptions,
-      css: defaultCssOptions,
-      server: defaultServeOptions,
+      build: createBuildOptions(),
+      css: createCssOptions(),
+      server: createServeOptions(),
     }),
     defineConfig({
       server: {
         port,
         proxy: {
-          // HTTP API 代理
           [API_BASE]: {
-            target: 'http://127.0.0.1:10002', // 后端接口地址
+            target: API_TARGET,
             changeOrigin: true,
             rewrite: path => path.replace(new RegExp(`^${API_BASE}`), ''),
           },
 
-          // WebSocket 代理
           [WS_BASE]: {
-            target: 'ws://127.0.0.1:10002', // WebSocket 地址
+            target: WS_TARGET,
             changeOrigin: true,
-            ws: true, // 开启 websocket 代理
+            ws: true,
             rewrite: path => path.replace(new RegExp(`^${WS_BASE}`), ''),
           },
 
-          // UE
           [UE_BASE]: {
-            target: 'http://127.0.0.1:901', // UE 地址
+            target: UE_TARGET,
             changeOrigin: true,
             rewrite: path => path.replace(new RegExp(`^${UE_BASE}`), ''),
           },

@@ -8,10 +8,9 @@
     "dev": "turbo run dev",
     "lint": "turbo run lint lint:root",
     "lint:root": "eslint . --ignore-pattern \"apps\" --ignore-pattern \"packages\" --fix --cache",
-    "format": "oxfmt --ignore-path .oxfmtignore .",
-    "format:check": "oxfmt --check --ignore-path .oxfmtignore .",
-    "spell": "turbo run spell spell:root",
-    "spell:root": "cspell \"**/*.{js,ts,mjs,cjs,json,css,less,scss,vue,html,md}\" \"!apps\" \"!packages\"",
+    "format": "oxfmt .",
+    "format:check": "oxfmt --check .",
+    "spell": "cspell \"**/*.{js,ts,mjs,cjs,json,css,less,scss,vue,html,md}\"",
     "type-check": "turbo run type-check",
     "test": "turbo run test",
     "test:watch": "turbo run test:watch",
@@ -30,16 +29,15 @@
     "@commitlint/cli": "^20.3.1",
     "@commitlint/config-conventional": "^20.3.1",
     "@repo/config-eslint": "workspace:*",
-    "@repo/config-spell": "workspace:*",
     "commitizen": "^4.3.1",
     "cspell": "^9.6.0",
     "cz-git": "^1.12.0",
     "eslint": "^9.39.2",
-    "eslint-plugin-oxlint": "~1.49.0",
+    "eslint-plugin-oxlint": "~1.62.0",
     "husky": "^9.1.7",
     "lint-staged": "^16.2.7",
-    "oxfmt": "^0.32.0",
-    "oxlint": "~1.49.0",
+    "oxfmt": "^0.47.0",
+    "oxlint": "~1.62.0",
     "rimraf": "^6.0.1",
     "turbo": "^2.7.4"
   },
@@ -57,12 +55,6 @@
   "pnpm": {
     "overrides": {
       "@types/node": "^24.10.9"
-    },
-    "onlyBuiltDependencies": [
-      "cn-font-split",
-      "esbuild",
-      "koffi",
-      "protobufjs"
-    ]
+    }
   }
 }

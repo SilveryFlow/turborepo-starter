@@ -33,12 +33,13 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 **技术栈：**
 
 - Vue 3 (Composition API + `<script setup>`)
-- TypeScript 5.9
-- Vite 7
+- TypeScript 6
+- Vite 8
 - Element Plus (UI 组件库)
 - UnoCSS (原子化 CSS)
 - Pinia (状态管理)
-- Vitest (测试框架)
+- Vitest 4 (测试框架)
+- Oxlint + oxfmt (lint + 格式化)
 
 ## 常用命令
 
@@ -54,10 +55,13 @@ pnpm dev
 # Lint 所有包（包括根目录）
 pnpm lint
 
-# 格式化所有代码（包括根目录）
+# 修复格式化
 pnpm format
 
-# 拼写检查（包括根目录）
+# 检查格式化
+pnpm format:check
+
+# 拼写检查（全项目）
 pnpm spell
 
 # 类型检查
@@ -110,10 +114,10 @@ pnpm --filter @repo/ui type-check
 
 ```bash
 # 在 utils 包中运行特定测试文件
-pnpm --filter @repo/utils test src/utils/date.test.ts
+pnpm --filter @repo/utils test src/math/__tests__/sum.spec.ts
 
 # 在 template-app 中运行特定测试
-pnpm --filter @repo/template-app test src/components/__tests__/Button.test.ts
+pnpm --filter @repo/template-app test src/components/__tests__/HelloWorld.spec.ts
 ```
 
 ## 项目架构
@@ -123,15 +127,14 @@ pnpm --filter @repo/template-app test src/components/__tests__/Button.test.ts
 ```
 pnpm-turborepo/
 ├── apps/
-│   └── template-app/          # Vue 3 应用程序模板
+│   ├── template-app/          # Vue 3 应用程序模板
+│   └── storybook/             # Storybook 10 组件文档和视觉测试
 ├── packages/
-│   ├── eslint-config/         # 共享 ESLint 配置
-│   ├── prettier-config/       # 共享 Prettier 配置
-│   ├── spell-config/          # 共享 CSpell 配置
-│   ├── typescript-config/     # 共享 TypeScript 配置
-│   ├── test-config/           # 共享 Vitest 配置
-│   ├── vite-config/           # 共享 Vite 配置
-│   ├── unocss-config/         # 共享 UnoCSS 配置
+│   ├── config-eslint/         # 共享 ESLint flat-config 预设
+│   ├── config-typescript/     # 共享 TypeScript 配置预设
+│   ├── config-test/           # 共享 Vitest 配置工厂
+│   ├── config-vite/           # 共享 Vite 配置（插件预设 + 构建选项）
+│   ├── config-unocss/         # 共享 UnoCSS 配置预设
 │   ├── utils/                 # 工具函数库（使用 tsdown 构建）
 │   └── ui/                    # Vue 3 UI 组件库（使用 Vite 构建）
 ├── turbo.json                 # Turborepo 配置
@@ -145,7 +148,8 @@ pnpm-turborepo/
 包通过 `workspace:*` 协议引用其他内部包。例如：
 
 - `@repo/template-app` 依赖 `@repo/ui` 和 `@repo/utils`
-- `@repo/ui` 依赖 `@repo/vite-config` 和各种配置包
+- `@repo/ui` 依赖 `@repo/config-vite` 和各种配置包
+- `@repo/storybook` 依赖 `@repo/ui`
 
 ### Turborepo 任务管道
 
@@ -158,27 +162,33 @@ pnpm-turborepo/
 - **test**: 依赖 `transit`，输出到 `coverage/`
 - **test:watch**: 禁用缓存，持久化任务
 
-`transit` 是一个内部任务，用于处理源文件的构建转换，依赖 `^transit`。
+`transit` 是一个内部任务，用于处理源文件的构建转换，依赖 `^transit`。它不产生输出，仅作为轻量级依赖传播机制，使 lint/type-check 等任务无需等待完整 build。
 
 ### 包类型
 
-**配置包**（使用 tsdown 构建）：
+**配置包**（纯配置导出，无需构建）：
 
-- `@repo/vite-config`
-- `@repo/test-config`
-- `@repo/unocss-config`
+- `@repo/config-eslint` — 导出 base/vue/vitest/vitest-vue 预设
+- `@repo/config-typescript` — 导出 JSON tsconfig 预设
+
+**构建配置包**（使用 tsdown 构建）：
+
+- `@repo/config-vite`
+- `@repo/config-test`
+- `@repo/config-unocss`
 
 **工具库**（使用 tsdown 构建）：
 
 - `@repo/utils`
 
-**UI 组件库**（使用 Vite 构建）：
+**UI 组件库**（使用 Vite 库模式构建）：
 
 - `@repo/ui`
 
 **应用程序**（Vue 3 + Vite）：
 
 - `@repo/template-app`
+- `@repo/storybook`
 
 ## Vue 3 开发规范
 
@@ -187,6 +197,7 @@ pnpm-turborepo/
 - Composition API with `<script setup>`
 - TypeScript
 - `<script setup lang="ts">` 格式
+- 组件文件名使用 PascalCase（如 `Button.vue`、`Input.vue`）
 
 组件示例：
 
@@ -232,8 +243,9 @@ chore(root): :hammer: 更新依赖版本
 
 Git pre-commit hook 通过 Husky + lint-staged 自动执行：
 
-- ESLint（自动修复）
-- Prettier（格式化）
+- oxlint（lint）
+- ESLint（lint + 自动修复）
+- oxfmt（格式化）
 - CSpell（拼写检查）
 
 ## 环境要求
@@ -251,7 +263,7 @@ Git pre-commit hook 通过 Husky + lint-staged 自动执行：
 - `lint-staged.config.js`: Git 暂存文件检查配置
 - `cspell.config.js`: 拼写检查配置
 - `eslint.config.js`: 根目录 ESLint 配置
-- `prettier.config.js`: 根目录 Prettier 配置
+- `.oxlintrc.json`: 根目录 Oxlint 配置
 
 ## 创建新包或应用
 
@@ -275,10 +287,11 @@ pnpm app:copy
 
 ## 构建
 
-配置包（vite-config, test-config, unocss-config）和工具库（utils）使用 **tsdown** 构建：
+配置包和工具库使用 **tsdown** 构建：
 
 ```bash
-pnpm --filter @repo/vite-config build
+pnpm --filter @repo/config-vite build
+pnpm --filter @repo/utils build
 ```
 
 UI 组件库和应用程序使用 **Vite** 构建：

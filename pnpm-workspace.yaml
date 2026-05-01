@@ -3,6 +3,5 @@ packages:
   - packages/*
 
 onlyBuiltDependencies:
-  - cn-font-split
-  - koffi
+  - esbuild
   - protobufjs

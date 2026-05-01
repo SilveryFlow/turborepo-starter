@@ -11,16 +11,12 @@
     "moduleDetection": "force",
     "resolveJsonModule": true,
 
-    "declaration": true,
-    "declarationMap": true,
-
     "isolatedModules": true,
     "esModuleInterop": true,
     "verbatimModuleSyntax": true,
 
     "strict": true,
     "noUncheckedIndexedAccess": true,
-    "exactOptionalPropertyTypes": true,
 
     "skipLibCheck": true
   }

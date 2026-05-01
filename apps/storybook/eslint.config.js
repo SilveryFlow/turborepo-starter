@@ -1,4 +1,5 @@
 import { config as vueConfig } from '@repo/config-eslint/vue'
+import pluginOxlint from 'eslint-plugin-oxlint'
 
 export default [
   {
@@ -10,4 +11,5 @@ export default [
     ignores: ['**/dist/**', '**/coverage/**'],
   },
   ...vueConfig,
+  ...pluginOxlint.buildFromOxlintConfigFile('../../.oxlintrc.json'),
 ]

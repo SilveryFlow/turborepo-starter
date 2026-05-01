@@ -3,16 +3,20 @@ import viteRestart from 'vite-plugin-restart'
 import { ViteImageOptimizer } from 'vite-plugin-image-optimizer'
 import UnoCSS from 'unocss/vite'
 import type { PluginOption } from 'vite'
-import Font from 'vite-plugin-font'
 
-export const vitePluginPreset = (): PluginOption[] => [
-  compression(),
-  viteRestart({
-    restart: ['.env*', 'vite.config.[jt]s', 'src/config/**/*', 'scripts/vite/**/*'],
-  }),
-  ViteImageOptimizer({}),
-  UnoCSS(),
-  Font.vite({
-    include: [/\.otf/, /\.ttf/, /\.woff/, /\.woff2/],
-  }),
-]
+export interface VitePluginPresetOptions {
+  command: 'build' | 'serve'
+}
+
+export const vitePluginPreset = (options?: VitePluginPresetOptions): PluginOption[] => {
+  const isBuild = options?.command === 'build'
+
+  return [
+    isBuild ? compression() : null,
+    viteRestart({
+      restart: ['.env*', 'vite.config.[jt]s'],
+    }),
+    ViteImageOptimizer({}),
+    UnoCSS(),
+  ].filter(Boolean)
+}
