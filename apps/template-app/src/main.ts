@@ -1,5 +1,3 @@
-import './assets/main.css'
-
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 
@@ -7,9 +5,8 @@ import App from './App.vue'
 import router from './router'
 
 import '@csstools/normalize.css'
-
 import 'virtual:uno.css'
-
+import '@/assets/styles/index.scss'
 import '@repo/ui/style.css'
 
 const app = createApp(App)

@@ -16,7 +16,6 @@
     "build": "tsdown",
     "dev": "tsdown --watch",
     "lint": "eslint . --fix --cache",
-    "spell": "cspell \"**/*.{js,ts,mjs,cjs,json,css,less,scss,vue,html,md}\"",
     "type-check": "tsc --noEmit",
     "test": "vitest run",
     "test:watch": "vitest",
@@ -24,17 +23,13 @@
     "clean:deps": "rimraf node_modules",
     "clean:artifacts": "rimraf dist"
   },
-  "dependencies": {
-    "dayjs": "^1.11.19"
-  },
   "devDependencies": {
     "@repo/config-eslint": "workspace:*",
-    "@repo/config-spell": "workspace:*",
     "@repo/config-test": "workspace:*",
     "@repo/config-typescript": "workspace:*",
     "@types/node": "^24.10.9",
     "tsdown": "^0.20.1",
-    "typescript": "^5.9.3",
-    "vitest": "^4.0.18"
+    "typescript": "~6.0.0",
+    "vitest": "^4.1.4"
   }
 }

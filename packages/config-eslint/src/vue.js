@@ -10,7 +10,7 @@ export const config = defineConfigWithVueTs(
   ...baseConfig,
 
   // Vue 3 推荐规则
-  ...pluginVue.configs['flat/essential'],
+  ...pluginVue.configs['flat/recommended'],
 
   // Vue + TypeScript 推荐规则
   vueTsConfigs.recommended,

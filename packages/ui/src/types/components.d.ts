@@ -13,6 +13,6 @@ declare module 'vue' {
   export interface GlobalComponents {
     Button: typeof import('./../components/buttons/Button.vue')['default']
     ElInput: typeof import('element-plus/es')['ElInput']
-    Input: typeof import('./../components/input/input.vue')['default']
+    Input: typeof import('./../components/input/Input.vue')['default']
   }
 }

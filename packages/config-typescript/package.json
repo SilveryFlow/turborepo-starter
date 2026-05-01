@@ -14,21 +14,20 @@
     "access": "public"
   },
   "scripts": {
-    "spell": "cspell \"**/*.{js,ts,mjs,cjs,json,css,less,scss,vue,html,md}\"",
     "clean": "rimraf node_modules",
     "clean:deps": "rimraf node_modules",
     "clean:artifacts": "echo \"No build artifacts to clean\""
   },
   "devDependencies": {
     "@tsconfig/node24": "^24.0.4",
-    "@types/jsdom": "^27.0.0",
+    "@types/jsdom": "^28.0.1",
     "@types/node": "^24.10.9",
-    "@vue/tsconfig": "^0.8.1"
+    "@vue/tsconfig": "^0.9.1"
   },
   "peerDependencies": {
     "@tsconfig/node24": "^24.0.4",
-    "@types/jsdom": "^27.0.0",
+    "@types/jsdom": "^28.0.1",
     "@types/node": "^24.10.9",
-    "@vue/tsconfig": "^0.8.1"
+    "@vue/tsconfig": "^0.9.1"
   }
 }

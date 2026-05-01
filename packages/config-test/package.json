@@ -15,7 +15,6 @@
   "scripts": {
     "build": "tsdown",
     "lint": "eslint . --fix --cache",
-    "spell": "cspell \"**/*.{js,ts,mjs,cjs,json,css,less,scss,vue,html,md}\"",
     "type-check": "tsc --noEmit",
     "clean": "rimraf dist node_modules",
     "clean:deps": "rimraf node_modules",
@@ -23,16 +22,15 @@
   },
   "devDependencies": {
     "@repo/config-eslint": "workspace:*",
-    "@repo/config-spell": "workspace:*",
     "@repo/config-typescript": "workspace:*",
     "@types/node": "^24.10.9",
-    "jsdom": "^27.4.0",
+    "jsdom": "^29.0.2",
     "tsdown": "^0.20.1",
-    "typescript": "^5.9.3",
-    "vitest": "^4.0.18"
+    "typescript": "~6.0.0",
+    "vitest": "^4.1.4"
   },
   "peerDependencies": {
-    "jsdom": "^27.4.0",
-    "vitest": "^4.0.18"
+    "jsdom": "^29.0.2",
+    "vitest": "^4.1.4"
   }
 }

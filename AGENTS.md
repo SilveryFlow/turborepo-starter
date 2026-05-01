@@ -1,12 +1,12 @@
 # AGENTS.md
 
-Instructions for coding agents working in this repository.
-This document is derived from executable configs (`package.json`, `turbo.json`, eslint/ts/vitest configs).
+Guidance for autonomous coding agents operating in this repository.
+Use this as the execution playbook for build/test/lint tasks and code-change conventions.
 
 ## Environment Rule: mise-first toolchain (MANDATORY)
 
 - This machine uses `mise` as the single source of truth for runtimes and global CLIs.
-- Never use `npm i -g` or `bun add -g` for tool installation.
+- Never use `npm i -g` or `pnpm add -g` for tool installation.
 - Install global CLIs via `mise` only: `mise use -g npm:<package>@<version>`.
 - Prefer execution via `mise x ... -- <cmd>` / `mise exec -- <cmd>` when possible.
 - Treat `mise` state-changing commands as exclusive/serial:
@@ -14,20 +14,25 @@ This document is derived from executable configs (`package.json`, `turbo.json`, 
 - Avoid running `mise reshim` unless explicitly required by the user.
 - If a required CLI is missing, first check `mise which <cmd>` and suggest a `mise use -g npm:<pkg>` fix.
 
-## Package Manager: Bun
+## Package Manager: pnpm
 
-- Package manager on this branch: Bun (`packageManager: bun@1.3.8`).
-- Use `bun` for all package operations (install, add, run, etc.).
-- Workspace filter syntax: `bun run --filter <package-name> <command>`.
-- For Bun package executors, prefer `bun x <pkg>` (do not assume `bunx` command exists).
-- Important caveat: Use `bun run build` and `bun run test` (avoid bare `bun build` / `bun test`).
+- Package manager on this branch: `pnpm` (`packageManager: pnpm@10.28.0`).
+- Use `pnpm` for all package operations (install, add, run, etc.).
+- Workspace filter syntax: `pnpm --filter <package-name> <command>`.
 
-## Source of truth
+## Source of Truth
 
-- Treat scripts/config files as authoritative.
-- If prose docs conflict with scripts/config, follow scripts/config.
+- Trust executable config first: `package.json`, `turbo.json`, workspace `package.json` scripts.
+- Treat prose docs as secondary when conflicts appear.
 
-## Layout
+## Repository Profile
+
+- Monorepo: Turborepo + pnpm workspaces.
+- Primary app: `apps/template-app` (Vue 3).
+- Shared packages: `packages/ui`, `packages/utils`, and shared config packages.
+- Root engines: Node >= 24, npm >= 11, pnpm >= 10.
+
+## Directory Map
 
 - `apps/template-app`: Vue app (Vite + Vitest + Vue Router + Pinia).
 - `packages/ui`: UI component library built with Vite.
@@ -37,81 +42,70 @@ This document is derived from executable configs (`package.json`, `turbo.json`, 
 - `packages/config-test`: shared Vitest config factory.
 - `turbo.json`: task graph, dependency edges, cache behavior.
 
-## Setup
+## Install / Bootstrap
 
 ```bash
-bun install
+pnpm install
 ```
 
-Notes:
-
-- Keep `bun.lock` authoritative.
-- Do not switch package manager in this branch.
-
-## Root commands
+## Root Commands (most common)
 
 ```bash
-bun dev
-bun run build
-bun lint
-bun format
-bun format:check
-bun spell
-bun type-check
-bun run test
-bun test:watch
+pnpm build
+pnpm dev
+pnpm lint
+pnpm format
+pnpm format:check
+pnpm spell
+pnpm type-check
+pnpm test
+pnpm test:watch
+pnpm clean
 ```
 
-Important Bun caveat:
+## Workspace-Scoped Commands
 
-- Use `bun run build` and `bun run test` (avoid bare `bun build` / `bun test`).
-
-## Package-scoped commands
+Use `--filter` for targeted execution:
 
 ```bash
-bun run --filter @repo/template-app dev
-bun run --filter @repo/template-app build
-bun run --filter @repo/ui build
-bun run --filter @repo/ui type-check
-bun run --filter @repo/utils test
+pnpm --filter @repo/template-app dev
+pnpm --filter @repo/template-app build
+pnpm --filter @repo/ui build
+pnpm --filter @repo/ui type-check
+pnpm --filter @repo/utils test
 ```
 
-## Single-test commands (important)
+## Single Test Execution (important)
 
-Vitest scripts are wired as `vitest run`, so pass a file path:
+Each package `test` script uses `vitest run`, so pass file paths directly:
 
 ```bash
 # utils single test file
-bun run --filter @repo/utils test src/math/__tests__/sum.spec.ts
+pnpm --filter @repo/utils test src/math/__tests__/sum.spec.ts
 
-# app single test file
-bun run --filter @repo/template-app test src/components/__tests__/HelloWorld.spec.ts
+# template-app single test file
+pnpm --filter @repo/template-app test src/components/__tests__/HelloWorld.spec.ts
 ```
 
-## Turborepo task behavior
+## Turborepo Task Model
 
-- `build` depends on `^build`.
-- `dev` depends on `^build`, is persistent, cache disabled.
-- `lint`, `type-check`, `test` depend on `transit`.
-- `test` outputs `coverage/**`.
-- `test:watch` is persistent and non-cached.
+- `build`: depends on `^build`, outputs `dist/**`.
+- `dev`: depends on `^build`, `persistent: true`, `cache: false`.
+- `lint`: depends on `transit`.
+- `type-check`: depends on `transit`.
+- `test`: depends on `transit`, outputs `coverage/**`.
+- `test:watch`: persistent and non-cached.
 
-## Lint/format/hooks
+## Lint / Format / Hooks
 
-- Lint:
-  - Root and packages use ESLint.
-  - `apps/template-app` runs `oxlint` then `eslint`.
-- Format:
-  - Formatter is `oxfmt`.
-  - Config: `.oxfmtrc.json`.
-  - Ignore path is passed explicitly: `--ignore-path .oxfmtignore`.
-- Pre-commit:
-  - Husky runs `bun x lint-staged --verbose`.
-  - lint-staged runs ESLint + oxfmt + cspell on staged files.
-- Commit-msg:
-  - `bun x commitlint --edit $1`.
+- ESLint is primary linter across root + packages.
+- `apps/template-app` runs `oxlint` + `eslint` (`run-s lint:*`).
+- Formatter is `oxfmt` (not Prettier) via root scripts and lint-staged.
+- `oxfmt` uses `--ignore-path .oxfmtignore`.
+- Pre-commit hook: `pnpm exec lint-staged --verbose`.
+- Commit-msg hook: `pnpm exec commitlint --edit $1`.
 
-## TypeScript standards
+## TypeScript Standards
 
 Shared baseline (`packages/config-typescript/src/tsconfig.base.json`) enforces:
 
@@ -122,44 +116,42 @@ Shared baseline (`packages/config-typescript/src/tsconfig.base.json`) enforces:
 - `verbatimModuleSyntax: true`
 - `isolatedModules: true`
 
-Agent rules:
+Agent guidance:
 
-- Do not bypass type safety (`any`, suppression comments) unless explicitly requested.
-- Prefer narrow, explicit types for public APIs.
-- Keep exported types stable and intentional.
+- Do not suppress type errors with `as any` / `@ts-ignore` unless explicitly requested.
+- Prefer explicit interfaces/types for public APIs.
+- Keep type surface stable when editing exported modules.
 
-## Vue and frontend conventions
+## Vue / Frontend Conventions
 
 - Use Composition API with `<script setup lang="ts">`.
-- Define typed props via `defineProps<...>()`.
-- Keep SFC order: script -> template -> style.
-- Multi-word component names are expected (`vue/multi-word-component-names` warning).
-- Follow existing utility/style conventions before introducing new patterns.
+- Use typed props with `defineProps<...>()`.
+- Keep SFC structure order: script -> template -> style.
+- Vue rule `vue/multi-word-component-names` is enabled at warning level.
+- Respect established utility class patterns and UnoCSS usage.
 
-## Imports and paths
+## Imports and Module Conventions
 
-- Alias `@` maps to `src` in app/ui TS + Vite config.
-- Keep imports deterministic:
-  - external imports first
-  - internal alias/relative imports next
-  - type-only imports when applicable
-- Keep barrel exports minimal and explicit (`src/index.ts`).
+- Prefer clear grouping: external imports first, internal imports second.
+- Use `import type` where semantically appropriate.
+- Keep barrel exports focused (`packages/*/src/index.ts`).
+- Avoid introducing circular deps across workspaces.
 
-## Naming conventions
+## Naming Conventions
 
-- Workspace package names: `@repo/<name>`.
-- Vue components: prefer PascalCase where local area uses PascalCase.
-- Utility modules: lower-case directories are common (`math`, `time`).
-- Test files: `*.spec.ts` / `*.test.ts` (and Vue equivalents).
+- Workspace package names follow `@repo/<name>`.
+- Vue component filenames generally PascalCase in app/UI component areas.
+- Utility directories/modules are often lower-case (`math`, `time`).
+- Test file conventions: `*.spec.ts`, `*.test.ts`, and Vue equivalents.
 
-## Error handling
+## Error Handling Expectations
 
 - No empty `catch` blocks.
-- Preserve/attach context when rethrowing errors.
-- Do not silently ignore async failures.
-- Keep bugfixes focused; avoid unrelated refactors.
+- Preserve context when rethrowing errors.
+- Do not silently swallow async failures.
+- Keep bugfixes minimal and scoped; avoid opportunistic refactors.
 
-## Testing expectations
+## Testing Expectations
 
 - Framework: Vitest.
 - Shared default environment: `jsdom`.
@@ -167,9 +159,14 @@ Agent rules:
 - For non-trivial changes, run:
   1. related single tests,
   2. impacted package tests,
-  3. root `bun run test` for cross-package impact.
+  3. root `pnpm test` for cross-package changes.
 
-## Cursor/Copilot rules check
+## Line Endings and Editor Defaults
+
+- Git attributes enforce LF: `* text=auto eol=lf`.
+- `.editorconfig` defaults: UTF-8, 2-space indent, trim trailing whitespace, final newline.
+
+## Cursor / Copilot Rules Check
 
 Checked locations:
 
@@ -179,4 +176,4 @@ Checked locations:
 
 Result:
 
-- No Cursor or Copilot rule files found in this repository.
+- No Cursor rules or Copilot instruction files are present in this repository.
