@@ -33,6 +33,6 @@ export default [
   // vitest-vue 测试配置
   ...vitestVueConfig,
 
-  // Oxlint 与 .oxlintrc.json 同源配置
+  // 禁用 oxlint 已覆盖的规则
   ...pluginOxlint.buildFromOxlintConfigFile('../../.oxlintrc.json'),
 ]

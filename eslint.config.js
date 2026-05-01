@@ -18,7 +18,9 @@ export default [
     ignores: ['**/dist/**', '**/dist-ssr/**', '**/coverage/**', '**/.vitepress/cache/**'],
   },
 
+  // vitest-vue 配置
   ...vitestVueConfig,
 
+  // 禁用 oxlint 已覆盖的规则
   ...pluginOxlint.buildFromOxlintConfigFile('.oxlintrc.json'),
 ]

@@ -17,6 +17,9 @@
         "$TURBO_ROOT$/packages/config-eslint/src/*.js"
       ]
     },
+    "//#lint:oxlint": {
+      "inputs": ["$TURBO_ROOT$/**/*.{js,ts,mjs,cjs,vue,jsx,tsx}", "$TURBO_ROOT$/.oxlintrc.json"]
+    },
     "//#format": {
       "cache": false
     },

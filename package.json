@@ -6,8 +6,9 @@
   "scripts": {
     "build": "turbo run build",
     "dev": "turbo run dev",
-    "lint": "turbo run lint lint:root",
+    "lint": "turbo run lint lint:oxlint lint:root",
     "lint:root": "eslint . --ignore-pattern \"apps\" --ignore-pattern \"packages\" --fix --cache",
+    "lint:oxlint": "oxlint --fix .",
     "format": "oxfmt .",
     "format:check": "oxfmt --check .",
     "spell": "cspell \"**/*.{js,ts,mjs,cjs,json,css,less,scss,vue,html,md}\"",

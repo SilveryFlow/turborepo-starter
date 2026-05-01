@@ -32,7 +32,6 @@
     "@vitest/browser-playwright": "^4.0.18",
     "eslint": "^9.39.2",
     "eslint-plugin-oxlint": "~1.62.0",
-    "oxlint": "~1.62.0",
     "playwright": "^1.58.2",
     "storybook": "^10.2.8",
     "typescript": "~6.0.0",
