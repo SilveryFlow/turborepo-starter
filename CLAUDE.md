@@ -133,7 +133,7 @@ pnpm-turborepo/
 │   ├── config-eslint/         # 共享 ESLint flat-config 预设
 │   ├── config-typescript/     # 共享 TypeScript 配置预设
 │   ├── config-test/           # 共享 Vitest 配置工厂
-│   ├── config-vite/           # 共享 Vite 配置（插件预设 + 构建选项）
+│   ├── config-vite/           # 共享 Vite 配置（通用插件预设 + 构建选项）
 │   ├── config-unocss/         # 共享 UnoCSS 配置预设
 │   ├── utils/                 # 工具函数库（使用 tsdown 构建）
 │   └── ui/                    # Vue 3 UI 组件库（使用 Vite 构建）
@@ -157,9 +157,9 @@ pnpm-turborepo/
 
 - **build**: 依赖 `^build`（依赖包必须先构建）
 - **dev**: 依赖 `^build`（依赖包必须先构建），禁用缓存，持久化任务
-- **lint**: 依赖 `transit`（构建转换任务）
+- **lint**: 子包依赖 `transit`（仅 eslint），根目录 `//#lint:oxlint`（全局 oxlint）+ `//#lint:root`（根 eslint）
 - **type-check**: 依赖 `transit`
-- **test**: 依赖 `transit`，输出到 `coverage/`
+- **test**: 依赖 `transit`
 - **test:watch**: 禁用缓存，持久化任务
 
 `transit` 是一个内部任务，用于处理源文件的构建转换，依赖 `^transit`。它不产生输出，仅作为轻量级依赖传播机制，使 lint/type-check 等任务无需等待完整 build。
@@ -239,14 +239,11 @@ fix(template-app): :bug: 修复路由跳转问题
 chore(root): :hammer: 更新依赖版本
 ```
 
-### Lint-staged
+### Lint 架构
 
-Git pre-commit hook 通过 Husky + lint-staged 自动执行：
-
-- oxlint（lint）
-- ESLint（lint + 自动修复）
-- oxfmt（格式化）
-- CSpell（拼写检查）
+- **oxlint**: Root Task，根目录全局执行（`//#lint:oxlint`），极快扫描全仓库
+- **ESLint**: 逐包执行，各包通过 `@repo/config-eslint` 选择 preset，`eslint-plugin-oxlint` 禁用 oxlint 已覆盖的规则
+- **lint-staged**: pre-commit 时对暂存文件运行 oxlint → eslint → oxfmt → cspell
 
 ## 环境要求
 
