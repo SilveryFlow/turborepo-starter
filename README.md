@@ -15,31 +15,32 @@
 - **pnpm** - 快速、节省磁盘空间的包管理器
 - **Turborepo** - 高性能的 Monorepo 构建系统
 - **Vue 3** - 使用 Composition API + `<script setup>` + TypeScript
-- **Vite 7** - 极速的前端构建工具
+- **Vite 8** - 极速的前端构建工具
 - **Element Plus** - Vue 3 UI 组件库
 - **UnoCSS** - 原子化 CSS 引擎
 - **Pinia** - Vue 状态管理库
-- **Vitest** - 基于 Vite 的测试框架
+- **Vitest 4** - 基于 Vite 的测试框架
+- **Oxlint + oxfmt** - 极速的 Lint + 格式化工具
+- **Storybook 10** - 组件文档和视觉测试
 
 ## 项目结构
 
 ```
 pnpm-turborepo/
 ├── apps/
-│   └── template-app/          # Vue 3 应用程序模板
+│   ├── template-app/          # Vue 3 应用程序模板
+│   └── storybook/             # Storybook 10 组件文档
 ├── packages/
-│   ├── eslint-config/         # 共享 ESLint 配置
-│   ├── prettier-config/       # 共享 Prettier 配置
-│   ├── spell-config/          # 共享 CSpell 配置
-│   ├── typescript-config/     # 共享 TypeScript 配置
-│   ├── test-config/           # 共享 Vitest 配置
-│   ├── vite-config/           # 共享 Vite 配置
-│   ├── unocss-config/         # 共享 UnoCSS 配置
+│   ├── config-eslint/         # 共享 ESLint flat-config 预设
+│   ├── config-typescript/     # 共享 TypeScript 配置预设
+│   ├── config-test/           # 共享 Vitest 配置工厂
+│   ├── config-vite/           # 共享 Vite 配置（通用插件预设 + 构建选项）
+│   ├── config-unocss/         # 共享 UnoCSS 配置预设
 │   ├── utils/                 # 工具函数库（使用 tsdown 构建）
 │   └── ui/                    # Vue 3 UI 组件库（使用 Vite 构建）
 ├── turbo.json                 # Turborepo 配置
 ├── pnpm-workspace.yaml        # pnpm workspace 配置
-└── package.json                # 根 package.json
+└── package.json               # 根 package.json
 ```
 
 ## 快速开始
@@ -47,7 +48,6 @@ pnpm-turborepo/
 ### 环境要求
 
 - Node.js >= 24
-- npm >= 11
 - pnpm >= 10
 
 ### 安装依赖
@@ -96,19 +96,20 @@ pnpm --filter @repo/template-app... build
 
 ### 根级别命令
 
-| 命令              | 说明                           |
-| ----------------- | ------------------------------ |
-| `pnpm build`      | 构建所有包                     |
-| `pnpm dev`        | 启动所有开发服务器             |
-| `pnpm lint`       | Lint 所有包                    |
-| `pnpm format`     | 格式化所有代码                 |
-| `pnpm spell`      | 拼写检查                       |
-| `pnpm type-check` | 类型检查                       |
-| `pnpm test`       | 运行所有测试                   |
-| `pnpm test:watch` | 运行测试监视模式               |
-| `pnpm app:new`    | 创建新的 workspace（应用或包） |
-| `pnpm app:copy`   | 复制现有 workspace             |
-| `pnpm commit`     | 提交代码（使用 Commitizen）    |
+| 命令                | 说明                           |
+| ------------------- | ------------------------------ |
+| `pnpm build`        | 构建所有包                     |
+| `pnpm dev`          | 启动所有开发服务器             |
+| `pnpm lint`         | Lint 所有包                    |
+| `pnpm format`       | 格式化所有代码（oxfmt）        |
+| `pnpm format:check` | 检查格式化                     |
+| `pnpm spell`        | 拼写检查                       |
+| `pnpm type-check`   | 类型检查                       |
+| `pnpm test`         | 运行所有测试                   |
+| `pnpm test:watch`   | 运行测试监视模式               |
+| `pnpm app:new`      | 创建新的 workspace（应用或包） |
+| `pnpm app:copy`     | 复制现有 workspace             |
+| `pnpm commit`       | 提交代码（使用 Commitizen）    |
 
 ### 针对特定包的命令
 
@@ -129,10 +130,10 @@ pnpm --filter @repo/utils lint
 
 ```bash
 # 在 utils 包中运行特定测试文件
-pnpm --filter @repo/utils test src/utils/date.test.ts
+pnpm --filter @repo/utils test src/math/__tests__/sum.spec.ts
 
 # 在 template-app 中运行特定测试
-pnpm --filter @repo/template-app test src/components/__tests__/Button.test.ts
+pnpm --filter @repo/template-app test src/components/__tests__/HelloWorld.spec.ts
 ```
 
 ## 技术栈
@@ -141,19 +142,20 @@ pnpm --filter @repo/template-app test src/components/__tests__/Button.test.ts
 
 - **Vue 3** - 渐进式 JavaScript 框架
   - Composition API + `<script setup>`
-  - TypeScript 5.9
-- **Vite 7** - 下一代前端构建工具
+  - TypeScript 6
+- **Vite 8** - 下一代前端构建工具
 - **Element Plus** - Vue 3 UI 组件库
 - **UnoCSS** - 即时原子化 CSS 引擎
 - **Pinia** - Vue 状态管理库
 
 ### 开发工具
 
-- **TypeScript** - JavaScript 的超集
-- **ESLint** - 代码 lint 工具
-- **Prettier** - 代码格式化工具
+- **TypeScript 6** - JavaScript 的超集
+- **ESLint 9** - 代码 lint 工具（flat config）
+- **Oxlint** - 基于 Oxide 的极速 Lint 工具
+- **oxfmt** - 基于 Oxide 的代码格式化工具
 - **CSpell** - 代码拼写检查工具
-- **Vitest** - 单元测试框架
+- **Vitest 4** - 单元测试框架
 - **Commitizen** - 规范化 Git 提交信息
 - **Commitlint** - Git 提交信息检查
 - **Husky** - Git hooks 管理
@@ -172,13 +174,16 @@ pnpm --filter @repo/template-app test src/components/__tests__/Button.test.ts
 
 ## 包类型
 
-### 配置包
+### 配置包（纯配置导出，无需构建）
 
-以下包使用 **tsdown** 构建：
+- `@repo/config-eslint` - 导出 base/vue/vitest/vitest-vue 预设
+- `@repo/config-typescript` - 导出 JSON tsconfig 预设
 
-- `@repo/vite-config` - Vite 配置
-- `@repo/test-config` - Vitest 配置
-- `@repo/unocss-config` - UnoCSS 配置
+### 构建配置包（使用 tsdown 构建）
+
+- `@repo/config-vite` - Vite 配置
+- `@repo/config-test` - Vitest 配置
+- `@repo/config-unocss` - UnoCSS 配置
 
 ### 工具库
 
@@ -191,26 +196,34 @@ pnpm --filter @repo/template-app test src/components/__tests__/Button.test.ts
 ### 应用程序
 
 - `@repo/template-app` - Vue 3 应用程序模板（使用 Vite 构建）
+- `@repo/storybook` - Storybook 10 组件文档和视觉测试
 
 ## Turborepo 任务管道
 
 关键任务依赖关系：
 
 - **build**: 依赖 `^build`（依赖包必须先构建）
-- **dev**: 依赖 `^build`（依赖包必须先构建），禁用缓存，持久化任务
-- **lint**: 依赖 `transit`（构建转换任务）
+- **dev**: 依赖 `^build`，禁用缓存，持久化任务
+- **lint**: 子包依赖 `transit`（仅 eslint），根目录全局 oxlint + eslint
 - **type-check**: 依赖 `transit`
-- **test**: 依赖 `transit`，输出到 `coverage/`
+- **test**: 依赖 `transit`
 - **test:watch**: 禁用缓存，持久化任务
 
-`transit` 是一个内部任务，用于处理源文件的构建转换，依赖 `^transit`。
+`transit` 是一个内部任务，用于处理源文件的构建转换，依赖 `^transit`。它不产生输出，仅作为轻量级依赖传播机制。
 
 ## Workspace 依赖
 
 包通过 `workspace:*` 协议引用其他内部包。例如：
 
 - `@repo/template-app` 依赖 `@repo/ui` 和 `@repo/utils`
-- `@repo/ui` 依赖 `@repo/vite-config` 和各种配置包
+- `@repo/ui` 依赖 `@repo/config-vite` 和各种配置包
+- `@repo/storybook` 依赖 `@repo/ui`
+
+## Lint 架构
+
+- **oxlint**: Root Task，根目录全局执行（`//#lint:oxlint`），极快扫描全仓库
+- **ESLint**: 逐包执行，各包通过 `@repo/config-eslint` 选择 preset，`eslint-plugin-oxlint` 禁用 oxlint 已覆盖的规则
+- **lint-staged**: pre-commit 时对暂存文件运行 oxlint → eslint → oxfmt → cspell
 
 ## Git 工作流
 
@@ -232,14 +245,6 @@ feat(ui): :sparkles: 添加新的 Button 组件
 fix(template-app): :bug: 修复路由跳转问题
 chore(root): :hammer: 更新依赖版本
 ```
-
-### Lint-staged
-
-Git pre-commit hook 通过 Husky + lint-staged 自动执行：
-
-- ESLint（自动修复）
-- Prettier（格式化）
-- CSpell（拼写检查）
 
 ## 创建新包或应用
 
@@ -290,42 +295,13 @@ const count = ref(0)
 
 ## pnpm 优势
 
-### 节省磁盘空间
-
-pnpm 使用硬链接和符号链接来避免重复下载相同的包，相比 npm/yarn 可以节省大量磁盘空间。
-
-### 严格的依赖管理
-
-pnpm 的严格模式确保只能访问 `package.json` 中声明的依赖，避免"幽灵依赖"问题。
-
-### 更快的安装速度
-
-得益于单仓库存储和高效的链接机制，pnpm 的安装速度通常比 npm/yarn 更快。
-
-### Monorepo 原生支持
-
-pnpm 内置 workspace 功能，与 Turborepo 配合使用效果更佳。
+- **节省磁盘空间** - 使用硬链接和符号链接避免重复下载
+- **严格的依赖管理** - 只能访问 `package.json` 中声明的依赖，杜绝"幽灵依赖"
+- **Monorepo 原生支持** - 内置 workspace 功能，与 Turborepo 配合效果更佳
 
 ## 有用的链接
 
-了解更多关于 Turborepo 和 pnpm 的信息：
-
-### Turborepo
-
-- [任务](https://turborepo.dev/docs/crafting-your-repository/running-tasks)
-- [缓存](https://turborepo.dev/docs/crafting-your-repository/caching)
-- [远程缓存](https://turborepo.dev/docs/core-concepts/remote-caching)
-- [过滤](https://turborepo.dev/docs/crafting-your-repository/running-tasks#using-filters)
-- [配置选项](https://turborepo.dev/docs/reference/configuration)
-- [CLI 用法](https://turborepo.dev/docs/reference/command-line-reference)
-
-### pnpm
-
-- [官方文档](https://pnpm.io/)
-- [Workspace 功能](https://pnpm.io/workspaces)
-- [过滤语法](https://pnpm.io/filtering)
-- [与 npm 的差异](https://pnpm.io/npm-vs-pnpm)
-
-## 许可证
-
-MIT
+- [Turborepo 文档](https://turborepo.dev/docs)
+- [Turborepo 缓存](https://turborepo.dev/docs/crafting-your-repository/caching)
+- [pnpm 官方文档](https://pnpm.io/)
+- [pnpm Workspace](https://pnpm.io/workspaces)
