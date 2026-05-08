@@ -1,19 +1,21 @@
 import type { BuildOptions } from 'vite'
 
-export interface AdvancedChunkGroup {
+export interface ChunkGroup {
   name: string
   test: RegExp
-  priority: number
+  priority?: number
+  minSize?: number
+  maxSize?: number
 }
 
 export interface CreateBuildOptions {
-  chunkGroups?: AdvancedChunkGroup[]
+  chunkGroups?: ChunkGroup[]
 }
 
-const defaultChunkGroups: AdvancedChunkGroup[] = [
-  { name: 'framework', test: /\/node_modules\/(vue|@vue\/|vue-router|pinia)\//, priority: 20 },
-  { name: 'element-plus', test: /\/node_modules\/element-plus\//, priority: 15 },
-  { name: 'vendor', test: /\/node_modules\//, priority: 10 },
+const defaultChunkGroups: ChunkGroup[] = [
+  { name: 'framework', test: /node_modules[\\/](vue|@vue\/|vue-router|pinia)\//, priority: 20 },
+  { name: 'element-plus', test: /node_modules[\\/]element-plus\//, priority: 15 },
+  { name: 'vendor', test: /node_modules/, priority: 10 },
 ]
 
 const assetFileNames = (assetInfo: { names?: string[] }) => {
@@ -31,12 +33,9 @@ export const createBuildOptions = (options?: CreateBuildOptions): BuildOptions =
       chunkFileNames: 'js/[name]-[hash].js',
       entryFileNames: 'js/[name]-[hash].js',
       assetFileNames,
-      advancedChunks: {
+      codeSplitting: {
         groups: options?.chunkGroups ?? defaultChunkGroups,
       },
     },
   },
 })
-
-/** @deprecated Use createBuildOptions() instead */
-export const defaultBuildOptions: BuildOptions = createBuildOptions()
