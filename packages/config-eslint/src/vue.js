@@ -6,11 +6,11 @@ import { config as baseConfig } from './base.js'
  * Vue 3 + TypeScript 项目的 ESLint 配置
  */
 export const config = defineConfigWithVueTs(
-  // 继承基础配置
+  // 继承基础配置（包含 eslint-config-prettier）
   ...baseConfig,
 
-  // Vue 3 推荐规则
-  ...pluginVue.configs['flat/recommended'],
+  // Vue 3 essential 规则（不包含格式化规则，与 oxfmt 不冲突）
+  ...pluginVue.configs['flat/essential'],
 
   // Vue + TypeScript 推荐规则
   vueTsConfigs.recommended,
@@ -20,7 +20,7 @@ export const config = defineConfigWithVueTs(
     name: 'repo/vue/custom',
     files: ['**/*.vue'],
     rules: {
-      'vue/multi-word-component-names': 'warn', // 多单词组件名称警告
+      'vue/multi-word-component-names': 'warn',
     },
   },
 )

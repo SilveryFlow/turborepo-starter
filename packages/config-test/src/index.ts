@@ -13,13 +13,14 @@ const sharedTestDefaults: NonNullable<ViteUserConfig['test']> = {
 
 export function createTestConfig(options: CreateTestConfigOptions = {}) {
   const testConfig = options.test
-    ? mergeConfig(sharedTestDefaults, options.test) as NonNullable<ViteUserConfig['test']>
+    ? (mergeConfig(sharedTestDefaults, options.test) as NonNullable<ViteUserConfig['test']>)
     : sharedTestDefaults
 
   return defineConfig(configEnv => {
-    const base = typeof options.viteConfig === 'function'
-      ? options.viteConfig(configEnv)
-      : (options.viteConfig ?? {})
+    const base =
+      typeof options.viteConfig === 'function'
+        ? options.viteConfig(configEnv)
+        : (options.viteConfig ?? {})
     return mergeConfig(base, { test: testConfig })
   })
 }
