@@ -10,9 +10,6 @@
     "./node": "./src/tsconfig.node.json",
     "./vue": "./src/tsconfig.vue.json"
   },
-  "publishConfig": {
-    "access": "public"
-  },
   "scripts": {
     "clean": "rimraf node_modules",
     "clean:deps": "rimraf node_modules",
@@ -20,13 +17,11 @@
   },
   "devDependencies": {
     "@tsconfig/node24": "catalog:",
-    "@types/jsdom": "catalog:",
     "@types/node": "catalog:",
     "@vue/tsconfig": "catalog:"
   },
   "peerDependencies": {
     "@tsconfig/node24": "catalog:",
-    "@types/jsdom": "catalog:",
     "@types/node": "catalog:",
     "@vue/tsconfig": "catalog:"
   }

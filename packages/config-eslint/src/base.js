@@ -2,7 +2,6 @@ import js from '@eslint/js'
 import skipFormatting from 'eslint-config-prettier/flat'
 import turboPlugin from 'eslint-plugin-turbo'
 import tseslint from 'typescript-eslint'
-import onlyWarn from 'eslint-plugin-only-warn'
 import globals from 'globals'
 
 /**
@@ -38,12 +37,6 @@ export const config = [
     },
   },
 
-  //将error转换为warn
-  {
-    plugins: {
-      onlyWarn,
-    },
-  },
   //忽略文件
   {
     ignores: ['dist/**', 'node_modules/**', 'coverage/**', '*.d.ts'],

@@ -49,4 +49,6 @@ yarn-error.log*
 **/.cspellcache
 
 .eslintrc-auto-import.json
+**/types/auto-imports.d.ts
+**/types/components.d.ts
 

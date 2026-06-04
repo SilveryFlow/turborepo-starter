@@ -20,6 +20,3 @@ export const createCssOptions = (options?: CreateCssOptions): CSSOptions => {
     },
   }
 }
-
-/** @deprecated Use createCssOptions() instead */
-export const defaultCssOptions: CSSOptions = createCssOptions()

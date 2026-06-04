@@ -15,6 +15,3 @@ export const createServeOptions = (options?: CreateServeOptions): ServerOptions 
     ],
   },
 })
-
-/** @deprecated Use createServeOptions() instead */
-export const defaultServeOptions: ServerOptions = createServeOptions()
