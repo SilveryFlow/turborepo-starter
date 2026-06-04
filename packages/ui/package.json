@@ -30,24 +30,24 @@
     "@repo/config-typescript": "workspace:*",
     "@repo/config-unocss": "workspace:*",
     "@repo/config-vite": "workspace:*",
-    "@types/node": "^24.10.9",
-    "@unocss/eslint-config": "^66.6.8",
-    "@vitejs/plugin-vue": "^6.0.6",
-    "@vueuse/core": "^14.1.0",
-    "element-plus": "^2.13.2",
-    "eslint-plugin-oxlint": "~1.63.0",
-    "sass-embedded": "^1.99.0",
-    "typescript": "~6.0.0",
-    "unocss": "^66.6.0",
-    "unplugin-vue-components": "^31.0.0",
-    "vite": "^8.0.8",
-    "vitest": "^4.1.4",
-    "vue": "^3.5.32",
-    "vue-tsc": "^3.2.6"
+    "@types/node": "catalog:",
+    "@unocss/eslint-config": "catalog:",
+    "@vitejs/plugin-vue": "catalog:",
+    "@vueuse/core": "catalog:",
+    "element-plus": "catalog:",
+    "eslint-plugin-oxlint": "catalog:",
+    "sass-embedded": "catalog:",
+    "typescript": "catalog:",
+    "unocss": "catalog:",
+    "unplugin-vue-components": "catalog:",
+    "vite": "catalog:",
+    "vitest": "catalog:",
+    "vue": "catalog:",
+    "vue-tsc": "catalog:"
   },
   "peerDependencies": {
-    "element-plus": "^2.13.2",
-    "unocss": "^66.6.0",
-    "vue": "^3.5.32"
+    "element-plus": "catalog:",
+    "unocss": "catalog:",
+    "vue": "catalog:"
   }
 }

@@ -1,12 +1,73 @@
 packages:
   - apps/*
   - packages/*
-
 allowBuilds:
-  '@parcel/watcher': true
+  "@parcel/watcher": true
   esbuild: true
   protobufjs: true
   vue-demi: true
-
-override:
-  '@types/node': '^24.10.9'
+catalog:
+  "@changesets/cli": ^2.29.8
+  "@commitlint/cli": ^20.3.1
+  "@commitlint/config-conventional": ^20.3.1
+  "@csstools/normalize.css": ^12.1.1
+  "@eslint/js": ^10.0.1
+  "@storybook/addon-a11y": ^10.3.6
+  "@storybook/addon-docs": ^10.3.6
+  "@storybook/addon-vitest": ^10.3.6
+  "@storybook/vue3": ^10.3.6
+  "@storybook/vue3-vite": ^10.3.6
+  "@tsconfig/node24": ^24.0.4
+  "@types/jsdom": ^28.0.1
+  "@types/node": ^24.10.9
+  "@unocss/eslint-config": ^66.6.8
+  "@vitejs/plugin-vue": ^6.0.6
+  "@vitest/browser-playwright": ^4.0.18
+  "@vitest/eslint-plugin": ^1.6.16
+  "@vue/eslint-config-typescript": ^14.7.0
+  "@vue/test-utils": ^2.4.6
+  "@vue/tsconfig": ^0.9.1
+  "@vueuse/core": ^14.1.0
+  "@vueuse/router": ^14.1.0
+  commitizen: ^4.3.1
+  cspell: ^10.0.0
+  cz-git: ^1.12.0
+  element-plus: ^2.13.2
+  eslint: ^10.3.0
+  eslint-config-prettier: ^10.1.8
+  eslint-plugin-only-warn: ^1.1.0
+  eslint-plugin-oxlint: ~1.63.0
+  eslint-plugin-turbo: ^2.9.10
+  eslint-plugin-vue: ~10.9.0
+  globals: ^17.6.0
+  husky: ^9.1.7
+  jiti: ^2.6.1
+  jsdom: ^29.0.2
+  lint-staged: ^17.0.2
+  npm-run-all2: ^8.0.4
+  oxfmt: ^0.48.0
+  oxlint: ~1.63.0
+  pinia: ^3.0.4
+  playwright: ^1.58.2
+  rimraf: ^6.0.1
+  sass-embedded: ^1.99.0
+  storybook: ^10.3.6
+  tsdown: ^0.20.1
+  turbo: ^2.9.10
+  typescript: ~6.0.0
+  typescript-eslint: ^8.59.0
+  unocss: ^66.6.0
+  unplugin-auto-import: ^21.0.0
+  unplugin-icons: ^23.0.1
+  unplugin-vue-components: ^31.0.0
+  vite: ^8.0.8
+  vite-plugin-compression2: ^2.4.0
+  vite-plugin-image-optimizer: ^2.0.3
+  vite-plugin-restart: ^2.0.0
+  vite-plugin-vue-devtools: ^8.1.1
+  vitest: ^4.1.4
+  vue: ^3.5.32
+  vue-echarts: ^8.0.1
+  vue-eslint-parser: ^10.4.0
+  vue-router: ^5.0.4
+  vue-tsc: ^3.2.6
