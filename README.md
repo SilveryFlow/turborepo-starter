@@ -1,13 +1,5 @@
 # pnpm + Turborepo Monorepo
 
-> [!NOTE]
-> 本仓库提供两个版本：
->
-> - **main 分支（当前）**：使用 pnpm 作为包管理器，磁盘占用更小
-> - **bun 分支**：使用 Bun 作为包管理器，安装速度更快
->
-> 切换分支命令：`git switch bun` 或 `git switch main`
-
 基于 pnpm + Turborepo 构建的 Vue 3 Monorepo 项目模板，用于开发可共享的 UI 组件库和应用程序。
 
 ## 特性
@@ -151,7 +143,7 @@ pnpm --filter @repo/template-app test src/components/__tests__/HelloWorld.spec.t
 ### 开发工具
 
 - **TypeScript 6** - JavaScript 的超集
-- **ESLint 9** - 代码 lint 工具（flat config）
+- **ESLint 10** - 代码 lint 工具（flat config）
 - **Oxlint** - 基于 Oxide 的极速 Lint 工具
 - **oxfmt** - 基于 Oxide 的代码格式化工具
 - **CSpell** - 代码拼写检查工具
@@ -169,8 +161,8 @@ pnpm --filter @repo/template-app test src/components/__tests__/HelloWorld.spec.t
   - 远程缓存支持
 - **pnpm** - 快速、节省磁盘空间的包管理器
   - 原生 workspace 支持
+  - Catalog 协议集中管理依赖版本
   - 严格的依赖管理
-  - 节省磁盘空间
 
 ## 包类型
 
@@ -213,6 +205,11 @@ pnpm --filter @repo/template-app test src/components/__tests__/HelloWorld.spec.t
 
 ## Workspace 依赖
 
+依赖版本通过 `pnpm-workspace.yaml` 的 `catalog:` 协议集中管理，所有包使用 `catalog:` 引用统一版本。例如：
+
+- `pnpm-workspace.yaml` 定义 `vue: ^3.5.32`
+- 所有 `package.json` 中 `"vue": "catalog:"` 引用该版本
+
 包通过 `workspace:*` 协议引用其他内部包。例如：
 
 - `@repo/template-app` 依赖 `@repo/ui` 和 `@repo/utils`
@@ -221,7 +218,7 @@ pnpm --filter @repo/template-app test src/components/__tests__/HelloWorld.spec.t
 
 ## Lint 架构
 
-- **oxlint**: Root Task，根目录全局执行（`//#lint:oxlint`），极快扫描全仓库
+- **oxlint**: Root Task，根目录全局执行（`//#lint:root:oxlint`），极快扫描全仓库
 - **ESLint**: 逐包执行，各包通过 `@repo/config-eslint` 选择 preset，`eslint-plugin-oxlint` 禁用 oxlint 已覆盖的规则
 - **lint-staged**: pre-commit 时对暂存文件运行 oxlint → eslint → oxfmt → cspell
 
@@ -297,6 +294,7 @@ const count = ref(0)
 
 - **节省磁盘空间** - 使用硬链接和符号链接避免重复下载
 - **严格的依赖管理** - 只能访问 `package.json` 中声明的依赖，杜绝"幽灵依赖"
+- **Catalog 协议** - 在 `pnpm-workspace.yaml` 集中定义版本，一处修改全局生效
 - **Monorepo 原生支持** - 内置 workspace 功能，与 Turborepo 配合效果更佳
 
 ## 有用的链接
