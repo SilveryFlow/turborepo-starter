@@ -11,19 +11,19 @@
       "dependsOn": ["transit"],
       "outputs": []
     },
-    "//#lint:root": {
+    "//#lint:root:eslint": {
       "inputs": [
         "$TURBO_ROOT$/*.{js,ts,mjs,cjs,vue}",
         "$TURBO_ROOT$/packages/config-eslint/src/*.js"
       ]
     },
-    "//#lint:oxlint": {
+    "//#lint:root:oxlint": {
       "inputs": ["$TURBO_ROOT$/**/*.{js,ts,mjs,cjs,vue,jsx,tsx}", "$TURBO_ROOT$/.oxlintrc.json"]
     },
-    "//#format": {
+    "//#format:root": {
       "cache": false
     },
-    "//#format:check": {},
+    "//#format:root:check": {},
     "//#spell": {},
     "transit": {
       "dependsOn": ["^transit"]

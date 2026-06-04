@@ -42,7 +42,7 @@ export default defineConfig(configEnv => {
           resolvers: [ElementPlusResolver()],
           dts: 'src/types/auto-imports.d.ts',
           eslintrc: {
-            enabled: true,
+            enabled: false,
           },
         }),
         Components({

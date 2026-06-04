@@ -27,9 +27,9 @@
     "@repo/config-eslint": "workspace:*",
     "@repo/config-test": "workspace:*",
     "@repo/config-typescript": "workspace:*",
-    "@types/node": "^24.10.9",
-    "tsdown": "^0.20.1",
-    "typescript": "~6.0.0",
-    "vitest": "^4.1.4"
+    "@types/node": "catalog:",
+    "tsdown": "catalog:",
+    "typescript": "catalog:",
+    "vitest": "catalog:"
   }
 }

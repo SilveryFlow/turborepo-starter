@@ -1,6 +1,5 @@
 import { config as vitestVueConfig } from '@repo/config-eslint/vitest-vue'
 import pluginOxlint from 'eslint-plugin-oxlint'
-import autoImport from './.eslintrc-auto-import.json' with { type: 'json' }
 import unocss from '@unocss/eslint-config/flat'
 
 /**
@@ -18,14 +17,6 @@ export default [
   {
     name: 'app/ignores',
     ignores: ['**/dist/**', '**/dist-ssr/**', '**/coverage/**', '**/.vitepress/cache/**'],
-  },
-
-  {
-    languageOptions: {
-      globals: {
-        ...autoImport?.globals,
-      },
-    },
   },
 
   unocss,

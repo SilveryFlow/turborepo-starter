@@ -2,6 +2,11 @@ packages:
   - apps/*
   - packages/*
 
-onlyBuiltDependencies:
-  - esbuild
-  - protobufjs
+allowBuilds:
+  '@parcel/watcher': true
+  esbuild: true
+  protobufjs: true
+  vue-demi: true
+
+override:
+  '@types/node': '^24.10.9'

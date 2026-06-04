@@ -16,28 +16,28 @@
   },
   "dependencies": {
     "@repo/ui": "workspace:*",
-    "element-plus": "^2.13.2",
-    "vue": "^3.5.32"
+    "element-plus": "catalog:",
+    "vue": "catalog:"
   },
   "devDependencies": {
     "@repo/config-eslint": "workspace:*",
     "@repo/config-typescript": "workspace:*",
     "@repo/config-unocss": "workspace:*",
-    "@storybook/addon-a11y": "^10.3.6",
-    "@storybook/addon-docs": "^10.3.6",
-    "@storybook/addon-vitest": "^10.3.6",
-    "@storybook/vue3": "^10.3.6",
-    "@storybook/vue3-vite": "^10.3.6",
-    "@types/node": "^24.10.9",
-    "@vitest/browser-playwright": "^4.0.18",
-    "eslint": "^10.3.0",
-    "eslint-plugin-oxlint": "~1.63.0",
-    "playwright": "^1.58.2",
-    "storybook": "^10.3.6",
-    "typescript": "~6.0.0",
-    "unocss": "^66.6.0",
-    "vite": "^8.0.8",
-    "vitest": "^4.1.4",
-    "vue-tsc": "^3.2.6"
+    "@storybook/addon-a11y": "catalog:",
+    "@storybook/addon-docs": "catalog:",
+    "@storybook/addon-vitest": "catalog:",
+    "@storybook/vue3": "catalog:",
+    "@storybook/vue3-vite": "catalog:",
+    "@types/node": "catalog:",
+    "@vitest/browser-playwright": "catalog:",
+    "eslint": "catalog:",
+    "eslint-plugin-oxlint": "catalog:",
+    "playwright": "catalog:",
+    "storybook": "catalog:",
+    "typescript": "catalog:",
+    "unocss": "catalog:",
+    "vite": "catalog:",
+    "vitest": "catalog:",
+    "vue-tsc": "catalog:"
   }
 }

@@ -21,17 +21,17 @@ const defaultChunkGroups: ChunkGroup[] = [
 const assetFileNames = (assetInfo: { names?: string[] }) => {
   const name = assetInfo?.names?.[0] ?? ''
   if (!name) return 'assets/[name]-[hash][extname]'
-  if (name.endsWith('.css')) return 'css/[name]-[hash][extname]'
-  if (/\.(png|jpe?g|gif|svg|webp|ico)$/.test(name)) return 'images/[name]-[hash][extname]'
-  if (/\.(woff2?|eot|ttf|otf)$/.test(name)) return 'fonts/[name]-[hash][extname]'
+  if (name.endsWith('.css')) return 'assets/css/[name]-[hash][extname]'
+  if (/\.(png|jpe?g|gif|svg|webp|ico)$/.test(name)) return 'assets/images/[name]-[hash][extname]'
+  if (/\.(woff2?|eot|ttf|otf)$/.test(name)) return 'assets/fonts/[name]-[hash][extname]'
   return 'assets/[name]-[hash][extname]'
 }
 
 export const createBuildOptions = (options?: CreateBuildOptions): BuildOptions => ({
   rolldownOptions: {
     output: {
-      chunkFileNames: 'js/[name]-[hash].js',
-      entryFileNames: 'js/[name]-[hash].js',
+      chunkFileNames: 'assets/js/[name]-[hash].js',
+      entryFileNames: 'assets/js/[name]-[hash].js',
       assetFileNames,
       codeSplitting: {
         groups: options?.chunkGroups ?? defaultChunkGroups,

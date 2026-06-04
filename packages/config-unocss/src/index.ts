@@ -1,4 +1,3 @@
-// uno.config.ts
 import {
   defineConfig,
   presetWind4,
@@ -7,6 +6,7 @@ import {
   transformerDirectives,
   transformerVariantGroup,
 } from 'unocss'
+import { discoverUnoSources } from './utils'
 
 export default defineConfig({
   // 1. 预设 (Presets)
@@ -39,4 +39,11 @@ export default defineConfig({
 
   // 4. theme
   theme: {},
+
+  content: {
+    filesystem: [
+      'src/**/*.{vue,js,ts,jsx,tsx,md,mdx}',
+      ...discoverUnoSources(),
+    ],
+  },
 })

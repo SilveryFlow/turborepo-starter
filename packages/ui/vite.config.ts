@@ -3,12 +3,21 @@ import { resolve } from 'path'
 import vue from '@vitejs/plugin-vue'
 import { createAlias, createCssOptions } from '@repo/config-vite'
 import UnoCSS from 'unocss/vite'
+import Components from 'unplugin-vue-components/vite'
+import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 
 // https://vite.dev/config/
 export default defineConfig(() => {
   return mergeConfig(
     defineConfig({
-      plugins: [vue(), UnoCSS()],
+      plugins: [
+        vue(),
+        UnoCSS(),
+        Components({
+          resolvers: [ElementPlusResolver({ importStyle: 'sass' })],
+          dts: 'src/types/components.d.ts',
+        }),
+      ],
       resolve: {
         alias: createAlias(import.meta.url),
       },
@@ -18,13 +27,12 @@ export default defineConfig(() => {
       build: {
         lib: {
           entry: resolve(import.meta.dirname, 'src/index.ts'),
-          name: 'RepoUI',
           fileName: 'index',
           formats: ['es'],
         },
         sourcemap: true,
-        rollupOptions: {
-          external: ['vue', 'unocss', /^element-plus(\/.*)?$/],
+        rolldownOptions: {
+          external: [/^vue(\/.*)?$/, /^unocss(\/.*)?$/, /^element-plus(\/.*)?$/],
           output: {
             preserveModules: true,
           },

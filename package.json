@@ -6,11 +6,13 @@
   "scripts": {
     "build": "turbo run build",
     "dev": "turbo run dev",
-    "lint": "turbo run lint lint:oxlint lint:root",
-    "lint:root": "eslint . --ignore-pattern \"apps\" --ignore-pattern \"packages\" --fix --cache",
-    "lint:oxlint": "oxlint --fix .",
-    "format": "oxfmt .",
-    "format:check": "oxfmt --check .",
+    "lint": "turbo run lint:root:oxlint lint:root:eslint lint",
+    "lint:root:eslint": "eslint . --ignore-pattern \"apps\" --ignore-pattern \"packages\" --fix --cache",
+    "lint:root:oxlint": "oxlint --fix .",
+    "format": "turbo run format:root",
+    "format:root": "oxfmt .",
+    "format:check": "turbo run format:root:check",
+    "format:root:check": "oxfmt --check .",
     "spell": "cspell \"**/*.{js,ts,mjs,cjs,json,css,less,scss,vue,html,md}\"",
     "type-check": "turbo run type-check",
     "test": "turbo run test",
@@ -26,21 +28,21 @@
     "prepare": "husky"
   },
   "devDependencies": {
-    "@changesets/cli": "^2.29.8",
-    "@commitlint/cli": "^20.3.1",
-    "@commitlint/config-conventional": "^20.3.1",
+    "@changesets/cli": "catalog:",
+    "@commitlint/cli": "catalog:",
+    "@commitlint/config-conventional": "catalog:",
     "@repo/config-eslint": "workspace:*",
-    "commitizen": "^4.3.1",
-    "cspell": "^10.0.0",
-    "cz-git": "^1.12.0",
-    "eslint": "^10.3.0",
-    "eslint-plugin-oxlint": "~1.63.0",
-    "husky": "^9.1.7",
-    "lint-staged": "^17.0.2",
-    "oxfmt": "^0.48.0",
-    "oxlint": "~1.63.0",
-    "rimraf": "^6.0.1",
-    "turbo": "^2.9.10"
+    "commitizen": "catalog:",
+    "cspell": "catalog:",
+    "cz-git": "catalog:",
+    "eslint": "catalog:",
+    "eslint-plugin-oxlint": "catalog:",
+    "husky": "catalog:",
+    "lint-staged": "catalog:",
+    "oxfmt": "catalog:",
+    "oxlint": "catalog:",
+    "rimraf": "catalog:",
+    "turbo": "catalog:"
   },
   "config": {
     "commitizen": {
@@ -50,12 +52,7 @@
   "engines": {
     "node": ">=24",
     "npm": ">=11",
-    "pnpm": ">=10"
+    "pnpm": ">=11"
   },
-  "packageManager": "pnpm@10.28.0",
-  "pnpm": {
-    "overrides": {
-      "@types/node": "^24.10.9"
-    }
-  }
+  "packageManager": "pnpm@11.5.1"
 }
