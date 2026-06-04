@@ -1,5 +1,5 @@
 {
-  "$schema": "https://turborepo.dev/schema.json",
+  "$schema": "./node_modules/turbo/schema.json",
   "ui": "tui",
   "tasks": {
     "build": {
@@ -14,22 +14,26 @@
     "//#lint:root:eslint": {
       "inputs": [
         "$TURBO_ROOT$/*.{js,ts,mjs,cjs,vue}",
-        "$TURBO_ROOT$/packages/config-eslint/src/*.js"
-      ]
+        "$TURBO_ROOT$/packages/config-eslint/src/*.js",
+        "$TURBO_ROOT$/.oxlintrc.json"
+      ],
+      "outputs": []
     },
     "//#lint:root:oxlint": {
-      "inputs": ["$TURBO_ROOT$/**/*.{js,ts,mjs,cjs,vue,jsx,tsx}", "$TURBO_ROOT$/.oxlintrc.json"]
+      "inputs": ["$TURBO_ROOT$/**/*.{js,ts,mjs,cjs,vue,jsx,tsx}", "$TURBO_ROOT$/.oxlintrc.json"],
+      "outputs": []
     },
     "//#format:root": {
       "cache": false
     },
     "//#format:root:check": {},
-    "//#spell": {},
+    "//#spell:root": {},
     "transit": {
       "dependsOn": ["^transit"]
     },
     "type-check": {
-      "dependsOn": ["transit"]
+      "dependsOn": ["transit"],
+      "outputs": ["node_modules/.tmp/**"]
     },
     "test": {
       "dependsOn": ["transit"],

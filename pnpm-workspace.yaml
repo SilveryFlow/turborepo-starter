@@ -2,33 +2,33 @@ packages:
   - apps/*
   - packages/*
 allowBuilds:
-  "@parcel/watcher": true
+  '@parcel/watcher': true
   esbuild: true
   protobufjs: true
   vue-demi: true
 catalog:
-  "@changesets/cli": ^2.29.8
-  "@commitlint/cli": ^20.3.1
-  "@commitlint/config-conventional": ^20.3.1
-  "@csstools/normalize.css": ^12.1.1
-  "@eslint/js": ^10.0.1
-  "@storybook/addon-a11y": ^10.3.6
-  "@storybook/addon-docs": ^10.3.6
-  "@storybook/addon-vitest": ^10.3.6
-  "@storybook/vue3": ^10.3.6
-  "@storybook/vue3-vite": ^10.3.6
-  "@tsconfig/node24": ^24.0.4
-  "@types/jsdom": ^28.0.1
-  "@types/node": ^24.10.9
-  "@unocss/eslint-config": ^66.6.8
-  "@vitejs/plugin-vue": ^6.0.6
-  "@vitest/browser-playwright": ^4.0.18
-  "@vitest/eslint-plugin": ^1.6.16
-  "@vue/eslint-config-typescript": ^14.7.0
-  "@vue/test-utils": ^2.4.6
-  "@vue/tsconfig": ^0.9.1
-  "@vueuse/core": ^14.1.0
-  "@vueuse/router": ^14.1.0
+  '@changesets/cli': ^2.29.8
+  '@commitlint/cli': ^20.3.1
+  '@commitlint/config-conventional': ^20.3.1
+  '@csstools/normalize.css': ^12.1.1
+  '@eslint/js': ^10.0.1
+  '@storybook/addon-a11y': ^10.3.6
+  '@storybook/addon-docs': ^10.3.6
+  '@storybook/addon-vitest': ^10.3.6
+  '@storybook/vue3': ^10.3.6
+  '@storybook/vue3-vite': ^10.3.6
+  '@tsconfig/node24': ^24.0.4
+  '@types/jsdom': ^28.0.1
+  '@types/node': ^24.10.9
+  '@unocss/eslint-config': ^66.6.8
+  '@vitejs/plugin-vue': ^6.0.6
+  '@vitest/browser-playwright': ^4.0.18
+  '@vitest/eslint-plugin': ^1.6.16
+  '@vue/eslint-config-typescript': ^14.7.0
+  '@vue/test-utils': ^2.4.6
+  '@vue/tsconfig': ^0.9.1
+  '@vueuse/core': ^14.1.0
+  '@vueuse/router': ^14.1.0
   commitizen: ^4.3.1
   cspell: ^10.0.0
   cz-git: ^1.12.0

@@ -22,9 +22,7 @@ export function discoverUnoSources(): string[] {
       const unoConfig = resolve(pkgDir, 'uno.config.ts')
       if (!existsSync(unoConfig)) continue
 
-      sources.push(
-        `${dir}/${name.name}/src/**/*.{vue,js,ts,jsx,tsx,md,mdx}`,
-      )
+      sources.push(`${dir}/${name.name}/src/**/*.{vue,js,ts,jsx,tsx,md,mdx}`)
     }
   }
 

@@ -69,6 +69,7 @@ export default defineConfig({
     'vueuse',
     'prettiercache',
     'oxlint',
+    'oxlintrc',
     'oxfmt',
     'oxfmtignore',
     'esbenp',

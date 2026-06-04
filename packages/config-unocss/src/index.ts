@@ -41,9 +41,6 @@ export default defineConfig({
   theme: {},
 
   content: {
-    filesystem: [
-      'src/**/*.{vue,js,ts,jsx,tsx,md,mdx}',
-      ...discoverUnoSources(),
-    ],
+    filesystem: ['src/**/*.{vue,js,ts,jsx,tsx,md,mdx}', ...discoverUnoSources()],
   },
 })
