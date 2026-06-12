@@ -39,7 +39,7 @@ export default defineConfig(configEnv => {
             '@vueuse/core',
             { '@vueuse/router': ['useRouteHash', 'useRouteQuery', 'useRouteParams'] },
           ],
-          resolvers: [ElementPlusResolver()],
+          resolvers: [ElementPlusResolver({ importStyle: 'sass' })],
           dts: 'src/types/auto-imports.d.ts',
           eslintrc: {
             enabled: false,
